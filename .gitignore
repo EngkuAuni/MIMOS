@@ -1,0 +1,23 @@
+# Virtual environment
+Streamlit_env/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data (large or sensitive files)
+*.csv
+*.xlsx
+*.json
+*.zip
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
