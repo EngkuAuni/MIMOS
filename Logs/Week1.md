@@ -42,6 +42,6 @@ Trained a custom object detection model for a robotics use case using YOLOv8. Th
 ### Notes
 - This was my first time contributing to a robotics-related deployment — very rewarding to see the model run successfully on hardware.
 - Roboflow’s annotation tools were helpful, but annotating grass-background fruitlets was time-intensive.
-- Looking forward to shifting into the GenAI application track (clinical or IC domain) next week.
+- Looking forward to shifting into the GenAI application track next week.
 
 ---
