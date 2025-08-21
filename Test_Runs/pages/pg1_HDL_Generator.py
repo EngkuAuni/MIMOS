@@ -3,11 +3,10 @@
 ## Display result & download option
 
 import streamlit as st
-import openai
-import os
+import ollama
 
-openai.api_key = "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"
 st.set_page_config(page_title = "HDL Generator", layout = "wide")
+st.title("HDL Code Generator")
 st.markdown ("Describe your desired logic module. This assistant will generate HDL code (Verilog) based on your input.")
 
 # Module Type: Counter, MUX, D Flip-Flop, ALU (arithmatic & logical computations), State Machine (ctrls operation sequence)
@@ -28,20 +27,23 @@ else:
 
 # Generate
 if st.button("Generate HDL Code") and task_description:
-    with st.spinner("Generating HDL Code..."):
+    with st.spinner("Generating..."):
         try:
-            from openai import OpenAI
-            client = OpenAI()
+            prompt = f````
+You are an expert digital design engineer. Generate clean, well commented Verilog HDL code.
+Task: {task_description}
+Only return code and comments, no extra text.
+            ````
 
-            response = client.chat.completions.create(
-                model = "gpt-3.5-turbo",
+            response = ollama.chat(
+                model = "mistral", 
                 messages = [
-                    {"role": "system", "content": "You are a digital design engineer. Generate clean verilog HDL code."},
-                    {"role": "user", "content": f"Write Verilog code for the following task:\n{task_description}"}
+                    {"role": "user", "content": prompt}
                 ],
-                temperature = 0.3
             )
-            verilog_code = response.choices[0].message.content
+
+            verilog_code = response["message"]["content"]
+
             st.success("Verilog HDL Generated:")
             st.code(verilog_code, language="verilog")
 
