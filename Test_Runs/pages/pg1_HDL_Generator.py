@@ -29,11 +29,11 @@ else:
 if st.button("Generate HDL Code") and task_description:
     with st.spinner("Generating..."):
         try:
-            prompt = f````
+            prompt = f"""
 You are an expert digital design engineer. Generate clean, well commented Verilog HDL code.
 Task: {task_description}
 Only return code and comments, no extra text.
-            ````
+            """
 
             response = ollama.chat(
                 model = "mistral", 
