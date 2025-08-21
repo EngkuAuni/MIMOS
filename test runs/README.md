@@ -42,11 +42,12 @@ Write a Moore FSM in Verilog with 3 states and a reset condition.
 ```
 
 ## APP Structure
-[Streamlit Frontend] -> [Prompt Fornatter] -> [Local LLM (Ollama API)]
-                                |
-                        [Response Parser]
-                                |
-                    [Display: Code, Docs, Q&A]
+[ Streamlit Frontend ] → [ Prompt Formatter ] → [ Local LLM (Ollama API) ]
+                                      ↓
+                                [ Response Parser ]
+                                      ↓
+                           [ Display: Code, Docs, Q&A ]
+
 
 - **Frontend (Streamlit)**: Input form, dropdowns and response display
 - **Prompt Handler**: Builds the instructions or query for the LLM
