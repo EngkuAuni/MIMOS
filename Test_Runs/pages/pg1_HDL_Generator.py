@@ -11,7 +11,7 @@ st.markdown ("Describe your desired logic module. This assistant will generate H
 
 # Module Type: Counter, MUX, D Flip-Flop, ALU (arithmatic & logical computations), State Machine (ctrls operation sequence)
 example_tasks = {
-    "4-bit Counter": "Generate a Verilog module for a 4-bit binary counter with enable and async reset.",
+    "4-bit Counter" : "Generate a Verilog module for a 4-bit binary counter with enable and async reset.",
     "2-to-1 Multiplexer": "Generate Verilog HDL code for 2-to-1 multiplexer with select line.",
     "D Flip-Flop" : "Write Verilog code for a D Flip-Flop with async reset.",
     "Simple ALU" : "Generate Verilog HDL code for a simple 4-bit ALU with ADD and SUB operations.",
