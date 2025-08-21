@@ -9,7 +9,7 @@ Trained a custom object detection model for a robotics use case using YOLOv8. Th
 - Trained the dataset using **YOLOv8** on **Google Colab** (50 epochs).
 - Exported and reviewed:
   - `best.pt` (trained weights)
-  - `results.png` (performance metrics)
+  - `pmetrics.png` (performance metrics)
 - Weight file was successfully tested on the physical robot — able to detect good-condition fruitlets selectively.
 
 #### 2. Streamlit Environment Setup
@@ -33,9 +33,9 @@ Trained a custom object detection model for a robotics use case using YOLOv8. Th
 
 ### Project Artifacts (Stored locally; not all committed to repo)
 - `best.pt` — final trained weights
-- `results.png` — training loss/accuracy graph
+- `pmetrics.png` — training loss/accuracy graph
 - `test_app.py` — basic app to verify deployment readiness
-- `docs/unit_testing_report.xlsx` — internal document, extracted from PDF
+- `docs/AIPOPA-LFC_UTR.xlsx` — internal document, extracted from PDF
 
 ---
 

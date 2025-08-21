@@ -49,7 +49,7 @@ This notebook walks through the full training pipeline:
 
 ### Video Demo
 
-▶️ [Watch Robot Test Video](./results/AIPOPA_training.mp4)
+▶️ [Watch Robot Test Video](./results/AIPOPA_Training.mp4)
 
 > Demonstrates the robot identifying ripe fruitlets using the trained model.
 
