@@ -10,7 +10,7 @@ The objective was to train a lightweight fruitlet detection model using **YOLOv8
 
 ## Training Notebook
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/EngkuAuni/MIMOS-GenAi/blob/main/Robotics_ObjDetection/LFC_Training.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](h[ttps://github.com/EngkuAuni/MIMOS-GenAi/blob/main/Robotics_ObjDetection/LFC_Training.ipynb](https://github.com/EngkuAuni/MIMOS/blob/b1b08d926a916136c78aa29117cff47c6caa6e11/Robotics%20ObjDetection/LFC%20Training.ipynb))
 
 This notebook walks through the full training pipeline:
 - Dataset loading from Roboflow (~240 annotated images)
