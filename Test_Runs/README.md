@@ -2,9 +2,8 @@
 
 This project is part of my GenAI internship initiative at MIMOS Berhad under the direction of Dr. Zulaikha. The overall objective is to develop generative AI applications across several domains. One of the proposed Proof-of-Concept (PoC) projects involves creating a GenAI assistant to support **integrated circuit (IC) design tasks**, including:
 
-    1. HDL code generation
-    2. Design documentation
-    3. Answering IC-related design queries  
+    1. HDL code generation (Verilog)
+    2. IC-related design queries and documentation
 
 Given this scope, I decided to focus on **HDL (Hardware Description Language)** as the core of this assistant for the following reasons:
 
@@ -13,7 +12,7 @@ Given this scope, I decided to focus on **HDL (Hardware Description Language)** 
 - Tasks such as writing Verilog modules, generating FSMs, or explaining timing behavior align well with the strengths of GenAI.  
 - HDL-specific support (like auto-generating modules or answering design trade-offs) offers **immediate, practical value** to IC designers.
 
-This assistant is designed to run fully offline using **local LLMs** via [Ollama](https://ollama.com), ensuring zero API cost and improved privacy. Users will have to have the same model installed and running locally + clone the repo (setup instructions in README.md)
+This assistant is designed to run fully offline using **local LLMs** via [Ollama](https://ollama.com), ensuring zero API cost and improved privacy. Users will have to have the same model installed and running locally + clone the repo (include setup instructions later**)
 
 ---
 
@@ -42,17 +41,25 @@ Write a Moore FSM in Verilog with 3 states and a reset condition.
 ```
 
 ## APP Structure
-[ Streamlit Frontend ] → [ Prompt Formatter ] → [ Local LLM (Ollama API) ]
-                                      ↓
-                                [ Response Parser ]
-                                      ↓
-                           [ Display: Code, Docs, Q&A ]
+## 🧩 APP Structure
 
+[ Streamlit Frontend ]  
+                                 ↓  
+[ Prompt Formatter ]  
+                                 ↓  
+[ Local LLM (Ollama API) ]  
+                                 ↓  
+[ Response Parser ]  
+                                 ↓  
+[ Display: Code, Docs, Q&A ]
 
 - **Frontend (Streamlit)**: Input form, dropdowns and response display
 - **Prompt Handler**: Builds the instructions or query for the LLM
 - **LLM Backend**: Model served locally using Ollama (Mistral or CodeLlama)
 - **Response Formatter**: Parsers the LLM's raw output into  readable/verifiable segments
+
+
+<details>
 
 ### Tried OpenAi but its not free, most open source aren't so we're gonna go with local models via Ollama app (Local LLM engine and server)
     - codellama:7b      # Open source language models
@@ -60,12 +67,13 @@ Write a Moore FSM in Verilog with 3 states and a reset condition.
 
 ---
 
-### Notes/Reference/Literature Review
+### Notes/Reference
 # FSM(Finite State Machine)
     - Mealy (output depends on both current state + current input) (faster response time but prone to asynchronous inputs)
     - Moore (output only depends on current state) (predictable with synchronized outputs, require more states)     # We'll focus on Moore due to their simpler output logic structure.
 
-# Parsers (which parser? eg. LangChain)
+# Parsers (JSON/LangChain?)
     - Crucial for making LLM outputs usable and actionable in various applications by transforming LLM's raw text into structured data that applications can readily utilize
     - Ensure consistent data extraction and structure
-    - Not needed if provide JSON schema?
+
+</details>

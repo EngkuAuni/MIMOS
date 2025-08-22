@@ -29,7 +29,7 @@ if st.button("Submit") and user_input:
     with st.spinner("Analyzing..."):
         try:
             prompt = f"""
-You are an expert digital IC design engineer.
+You are an expert digital IC design engineer and techincal writer.
 If the input is Verilog HDL code, explain it clearly.
 If it's a question about IC/HDL concepts, provide an accurate explaination.
 Be concise and helpful.
