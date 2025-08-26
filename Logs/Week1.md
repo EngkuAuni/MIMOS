@@ -4,7 +4,7 @@
 Trained a custom object detection model for a robotics use case using YOLOv8. The model identifies ripe fruitlets to assist the AIPOPA robot in selective vacuuming/retrieving tasks.
 
 #### 1. Dataset Annotation & Training
-- Annotated ~300 fruitlet images in **Roboflow**.
+- Annotated ~240 fruitlet images in **Roboflow**.
 - Created a YOLOv8-compatible dataset version.
 - Trained the dataset using **YOLOv8** on **Google Colab** (50 epochs).
 - Exported and reviewed:

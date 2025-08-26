@@ -32,7 +32,7 @@ This notebook walks through the full training pipeline:
 | Item | Details |
 |------|---------|
 | Framework | YOLOv8 (Ultralytics) |
-| Dataset | 306 images (Roboflow annotation) |
+| Dataset | ~240 images (Roboflow annotation) |
 | Training | 50 epochs on Google Colab |
 | Outputs | `best.pt`, `pmetrics.png`, test video |
 | Deployment | Successfully tested on the AIPOPA robot |

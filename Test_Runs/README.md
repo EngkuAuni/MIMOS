@@ -41,7 +41,6 @@ Write a Moore FSM in Verilog with 3 states and a reset condition.
 ```
 
 ## APP Structure
-## 🧩 APP Structure
 
 [ Streamlit Frontend ]  
                                  ↓  
