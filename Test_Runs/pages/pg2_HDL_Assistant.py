@@ -30,9 +30,13 @@ if st.button("Submit") and user_input:
         try:
             prompt = f"""
 You are an expert digital IC design engineer and techincal writer.
-If the input is Verilog HDL code, explain it clearly.
-If it's a question about IC/HDL concepts, provide an accurate explaination.
-Be concise and helpful.
+Given the following input (which may be Verilog HDL or a conceptual design question), provide your response in JSON format like this:
+{{
+    "type": "code_explaination" or "design_question",
+    "summary": "Brief explainantion of what the code does or answer to the question.",
+    "code_comments": "If code, add detailed line-by-line commentary.",
+    "additional_notes": "Optional - design tips, common mistakes, related concepts."
+}}
 Input: {user_input}
             """
 
@@ -42,11 +46,27 @@ Input: {user_input}
                     {"role": "user", "content": prompt}
                 ],
             )
+            
+            raw_output = response["message"]["content"]
 
-            answer = response["message"]["content"]
+            try:
+                parsed = json.loads(raw_output)
 
-            st.success("Assistant response:")
-            st.markdown(answer)
+                st.success("Assistant response:")
+                st.subheader("Summary")
+                st.markdown(parsed.get("summary", ""))
+
+                if parsed.get("code_comments"):
+                    st.subheader("Code Commentary")
+                    st.code(parsed["code_comments"], language = "verilog")
+
+                if parsed.get("additional_notes"):
+                    st.subheader("Additional Notes")
+                    st.markdown(parsed["additional_notes"])
+            
+            except json.JSONDecodeError:
+                st.warning("Could not parse structured output. Showing raw response instead:")
+                st.markdown(raw_output)
 
         except Exception as e:
             st.error(f"Error: {e}")

@@ -3,7 +3,7 @@ import os
 def create_weekly_log(week_number, start_date, end_date, tasks, tools, notes):
     folder_path = "Logs"
     os.makedirs(folder_path, exist_ok=True)
-    log_path = os.path.join(folder_path, f"week{week_number}.md")
+    log_path = os.path.join(folder_path, f"Week{week_number}.md")
 
     with open(log_path, "w") as f:
         f.write(f"# Internship Log — Week {week_number} ({start_date}–{end_date})\n\n")

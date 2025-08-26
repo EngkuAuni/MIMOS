@@ -12,7 +12,7 @@ Given this scope, I decided to focus on **HDL (Hardware Description Language)** 
 - Tasks such as writing Verilog modules, generating FSMs, or explaining timing behavior align well with the strengths of GenAI.  
 - HDL-specific support (like auto-generating modules or answering design trade-offs) offers **immediate, practical value** to IC designers.
 
-This assistant is designed to run fully offline using **local LLMs** via [Ollama](https://ollama.com), ensuring zero API cost and improved privacy. Users will have to have the same model installed and running locally + clone the repo (include setup instructions later**)
+This assistant is designed to run fully offline using **local LLMs** via [Ollama](https://ollama.com), ensuring zero API cost and improved privacy. Users will have to have the same model installed and running locally + clone the repo (setup instructions to be included)
 
 ---
 
@@ -24,7 +24,30 @@ This PoC aims to build a functional and lightweight HDL assistant that:
 - Provides **inline documentation** or comments for generated code
 - Answers **common HDL and IC design questions**
 - Supports FSM generation (Moore only), counters, muxes, and other fundamental modules
-- Runs entirely **offline** using local LLMs (e.g. Mistral, CodeLlama)
+- Runs entirely **offline** using local LLMs (e.g. Mistral/CodeLlama)
+
+### Modules
+
+#### 1. `HDL Generator` (pg1)
+
+> Generates Verilog HDL code for logic modules based on user prompts.
+
+- Preset dropdowns for common modules (FSM, counter, MUX, etc.)
+- Clean, commented Verilog code
+- Downloadable `.v` file output
+- Powered by local LLMs (Mistral, CodeLlama via Ollama)
+
+#### 2. `HDL Assistant` (pg2)
+
+> Explains HDL code or answers IC design-related questions.
+
+- Accepts either HDL code or design queries
+- Uses structured prompts to generate:
+
+  - A summary
+  - Line-by-line code commentary (if applicable)
+  - Extra tips or related concepts
+- Returns a JSON-formatted response (parsed and cleanly displayed in the app)
 
 ---
 
@@ -60,13 +83,11 @@ Write a Moore FSM in Verilog with 3 states and a reset condition.
 
 <details>
 
+### Notes/Reference
 ### Tried OpenAi but its not free, most open source aren't so we're gonna go with local models via Ollama app (Local LLM engine and server)
     - codellama:7b      # Open source language models
     - mistral
 
----
-
-### Notes/Reference
 # FSM(Finite State Machine)
     - Mealy (output depends on both current state + current input) (faster response time but prone to asynchronous inputs)
     - Moore (output only depends on current state) (predictable with synchronized outputs, require more states)     # We'll focus on Moore due to their simpler output logic structure.

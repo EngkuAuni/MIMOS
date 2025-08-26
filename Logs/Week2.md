@@ -8,35 +8,30 @@ This week focused on developing a local GenAI-powered HDL assistant that can hel
 
 ### Tasks Completed
 
-* Set up local LLM environment using Ollama to bypass API limitations (OpenAI tokens exhausted).
-* Installed and configured models (Mistral, CodeLlama) for offline inference.
-* Developed first module of the HDL Assistant web app: `HDL Generator`.
-* This module takes in user HDL design task and generates Verilog HDL code using local LLM.
-* Designed dropdown presets and flexible prompt interface for FSM, counters, mux, etc.
-* Second module developed: `HDL Assistant`, which explains HDL code or answers IC-related queries.
-* Integrated both modules into a multi-page Streamlit app per project outline.
-* Documented HDL-related concepts (FSM, HDL syntax, use cases) in README.
-* Refined GitHub repo structure, organized by project folders and logs.
-* Improved Week 1 object detection project docs (results folder, video, `.ipynb` included).
+- Set up local LLM environment using Ollama to bypass API limitations (OpenAI tokens exhausted).
+- Installed and configured models (Mistral, CodeLlama) for offline inference.
+- Developed first module of the HDL Assistant web app: `HDL Generator`.
+- Designed dropdown presets and flexible prompt interface for FSM, counters, mux, etc.
+- This module takes in user HDL design task and generates Verilog HDL code using local LLM.
+- Second module developed: `HDL Assistant`, which explains HDL code or answers IC-related queries.
+- Ensured the app runs fully offline using local models and responds accurately to user queries.
 
 ---
 
 ### Tools & Platforms Used
 
-* Ollama (local LLM deployment)
-* Mistral, CodeLlama
-* Streamlit (multi-page app)
-* Python
-* GitHub (repo structure, commit tracking)
-* Markdown (README, weekly logs)
+- Ollama (local LLM engine & server)
+- Mistral (open source LLM)
+- Streamlit 
+- Python
 
 ---
 
 ### Notes
 
-* Running local models requires sufficient disk space and uninterrupted downloads.
-* Prompt formatting significantly affects LLM output quality for Verilog generation.
-* Model inference time varies — small models like Mistral offer faster local performance.
-* Documented the design structure and intent clearly to aid onboarding/future contributions.
-* Plan to explore further tools for output formatting and potential circuit diagram generation.
+- Opted for local LLM as its more doable on current device MacBook Air M1 (2020).
+- Prompt formatting significantly affects LLM output quality for Verilog generation.
+- Model inference time varies — small models like Mistral offer faster local performance.
+- Clean module ssparation supports expandability (future testbench generation, visualization, etc)
+- Plan to explore further tools for output formatting and potential circuit diagram generation.
 
