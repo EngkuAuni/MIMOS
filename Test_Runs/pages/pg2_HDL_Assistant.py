@@ -1,10 +1,10 @@
-## What would an IC designer find useful about this app?
-# HDL Code Explainer
+# HDL Code & IC Design Explainer
 # Input HDL code or IC design queries --> Get explanation
 # Display result (Q&A or code explaination)
 
 import streamlit as st
 import ollama
+import json
 
 st.set_page_config(page_title = "HDL Assistant", layout = "wide")
 st.title("HDL Assistant")
