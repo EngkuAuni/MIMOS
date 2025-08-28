@@ -29,7 +29,8 @@ Input: {user_input}
 
 st.set_page_config(page_title="HDL Assistant", layout="wide")
 st.title("HDL Assistant")
-st.markdown("Ask anything about HDL or IC design. You can also paste Verilog code to get an explanation.")
+st.markdown("If you generated HDL code in the previous step, it's auto-filled below for explainantion." \
+"Or paste any HDL code, or ask any IC design question!")
 
 example_inputs = {
     "Explain HDL Code": "module counter(input clk, reset, output reg [3:0] count); always @(posedge clk or posedge reset) begin if (reset) count <= 0; else count + 1; end endmodule",
@@ -46,7 +47,7 @@ selected_example = st.selectbox("Examples", ['-- Select --'] + list(example_inpu
 if selected_example != "-- Select --":
     user_input = st.text_area("Enter HDL code or IC design queries:", value=example_inputs[selected_example], height=300)
 else:
-    user_input = st.text_area("Enter HDL code or IC design queries:", height=300)
+    user_input = st.text_area("Enter HDL code or IC design queries:", value=prefill, height=300)
 
 if st.button("Submit") and user_input:
     with st.spinner("Analyzing..."):
@@ -69,6 +70,3 @@ if st.button("Submit") and user_input:
                 st.markdown(raw_output)
         except Exception as e:
             st.error(f"Error: {e}")
-if st.button("Next: Simulation");
-    st.experimental_set_query_params(page="4_Simulation")
-    st.info("Navigate to the Simulation page using the sidebar.")
