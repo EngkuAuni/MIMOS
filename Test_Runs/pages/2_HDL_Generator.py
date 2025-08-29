@@ -1,10 +1,12 @@
 # HDL Code Generator
 # Input HDL task --> Generate Verilog code
-# Display HDL code & testbench option 
+# Display HDL code & testbench option
+# .vcd generation option for tb 
 # Download options
 
 import streamlit as st
 import ollama
+import re
 
 def generate_hdl_code(spec, model="mistral"):
     prompt = f"""
@@ -37,8 +39,11 @@ Module code:
     return response["message"]["content"]
 
 st.set_page_config(page_title="HDL Generator", layout="wide")
-st.title("GenAI HDL Code Generator")
+st.title("HDL Code Generator")
 st.markdown("Generate HDL code from your specification (auto-filled from previous step). You may edit if needed.")
+
+# VCD toggle UI
+vcd_toggle = st.checkbox("Generate waveform file for simulation (wave.vcd)", value=True)
 
 # Pre-fill with spec from Specification page if available
 if "specification" in st.session_state:
@@ -66,7 +71,7 @@ if "generate_tb" not in st.session_state:
     st.session_state["generate_tb"] = False
 
 if st.button("Generate HDL Code") and spec_input:
-    with st.spinner("Generating HDL code..."):
+    with st.spinner("Generating..."):
         try:
             st.session_state["hdl_code"] = generate_hdl_code(spec_input)
             st.session_state["testbench_code"] = ""  # Reset testbench when new HDL is generated
@@ -88,6 +93,25 @@ if hdl_code:
 if st.session_state["generate_tb"] and not testbench_code and hdl_code:
     with st.spinner("Generating Testbench..."):
         try:
+            raw_tb_code = generate_testbench(hdl_code)
+            ## VCD Injection logic
+            if vcd_toggle:
+                # Try to extract testbench module name for $dumpvars
+                match = re.search(r'module\s+(\w+)', raw_tb_code)
+                tb_mod_name = match.group(1) if match else "tb"
+                vcd_block = f"""
+initial begin
+    $dumpfile("wave.vcd");
+    $dumpvars(0, {tb_mod_name});
+end
+"""
+                # Insert before 'endmodule'
+                if "endmodule" in raw_tb_code:
+                    testbench_code = raw_tb_code.replace("endmodule", vcd_block + "\nendmodule")
+                else:
+                    testbench_code = raw_tb_code + vcd_block
+            else:
+                testbench_code = raw_tb_code
             st.session_state["testbench_code"] = generate_testbench(hdl_code)
             st.session_state["generate_tb"] = False  # Reset after generation
         except Exception as e:

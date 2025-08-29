@@ -1,0 +1,10 @@
+=== Compile Output ===
+sim_files/testbench.v:3: warning: macro verilog undefined (and assumed null) at this point.
+sim_files/module.v:3: warning: macro verilog undefined (and assumed null) at this point.
+sim_files/module.v:41: warning: macro enable undefined (and assumed null) at this point.
+sim_files/module.v:41: warning: macro up_down undefined (and assumed null) at this point.
+sim_files/testbench.v:1: syntax error
+I give up.
+
+=== Simulation Output ===
+sim_files/sim.out: Unable to open input file.

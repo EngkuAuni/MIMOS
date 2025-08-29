@@ -1,4 +1,4 @@
-# Example spcs for quick start
+# Example specs for quick start
 # Collects and saves requirements in st.session_state for use across pages
 # Shows last saved spec and allows download as JSON
 
