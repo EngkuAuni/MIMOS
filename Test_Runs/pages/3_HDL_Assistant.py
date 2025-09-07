@@ -29,8 +29,8 @@ Input: {user_input}
 
 st.set_page_config(page_title="HDL Assistant", layout="wide")
 st.title("HDL Assistant")
-st.markdown("If you generated HDL code in the previous step, it's auto-filled below for explainantion." \
-"Or paste any HDL code, or ask any IC design question!")
+st.markdown("If you generated HDL code in the previous step, it's auto-filled below for explaination." \
+" Or paste any HDL code, or ask any IC design question!")
 
 example_inputs = {
     "Explain HDL Code": "module counter(input clk, reset, output reg [3:0] count); always @(posedge clk or posedge reset) begin if (reset) count <= 0; else count + 1; end endmodule",

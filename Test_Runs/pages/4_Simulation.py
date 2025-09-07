@@ -58,20 +58,37 @@ vcd_exists = False
 if st.button("Run Simulation"):
     with st.spinner("Running simulation..."):
         try:
-            # Compile
+            #Clean old .vcd
+            if os.path.exists(vcd_path):
+                os.remove(vcd_path)
+            
+            # Compile HDL and testbench
             compile_cmd = ["iverilog", "-o", out_path, tb_path, hdl_path]
             compile_proc = subprocess.run(compile_cmd, capture_output=True, text=True)
             compile_output = compile_proc.stdout + compile_proc.stderr
+            
+            # Show compile log
+            st.text_area("Compile Log", value=compile_output, height=200)
+           
+            # If compilation failed, stop here
+            if not os.path.exists(out_path):
+                st.error("Compilation failed. Check the compile log above.")
+                
             # Run
             run_cmd = ["vvp", out_path]
             run_proc = subprocess.run(run_cmd, capture_output=True, text=True)
             sim_output = run_proc.stdout + run_proc.stderr
+
             # Save log
             with open(log_path, "w") as f:
                 f.write("=== Compile Output ===\n")
                 f.write(compile_output)
                 f.write("\n=== Simulation Output ===\n")
                 f.write(sim_output)
+            
+            # Show simulation output
+            st.text_area("Simulation Log", value=sim_output, height=200)
+           
             # Check for VCD file
             vcd_exists = os.path.exists(vcd_path)
             if vcd_exists:
@@ -79,9 +96,7 @@ if st.button("Run Simulation"):
                 st.download_button("Download Waveform (.vcd)", open(vcd_path, "rb").read(), file_name="wave.vcd")
                 st.info("To view waveforms, open wave.vcd in GTKWave.")
             else:
-                st.warning("Simulation ran, but no waveform (.vcd) generated. Make sure your testbench contains $dumpfile and $dumpvars statements.")
-            # Show simulation log
-            st.text_area("Simulation Log", value=sim_output, height=200)
+                st.warning("Simulation ran, but no waveform (.vcd) generated. \n\nMake sure your testbench includes:\n\n $dumpfile(\"sim_files/wave.vcd\");\n $dumpvars;")
             st.download_button("Download Full Log", open(log_path).read(), file_name="sim.log")
         except Exception as e:
             st.error(f"Simulation error: {e}")
