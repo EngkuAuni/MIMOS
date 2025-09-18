@@ -3,29 +3,62 @@
 # Display result (Q&A or code explaination)
 
 import streamlit as st
-import ollama
+import re
 import json
+from LLM_utils import call_llm
 
-def analyze_hdl(user_input, model="mistral"):
+def strip_narrative_text(code):
+    """Remove LLM narrative like <think> tags or intros before `module` or JSON."""
+    code = re.sub(r"<think>.*?</think>", "", code, flags=re.DOTALL)
+    code = code.replace("```json", "").replace("```", "").strip()
+    
+    # Remove intro text
+    code = re.sub(r"(?i)^here is.*?({|\[|module)", r"\1", code.strip(), flags=re.DOTALL)
+    
+    return code
+
+def is_verilog_code(text):
+    """Simple heuristic to detect Verilog code."""
+    return bool(re.search(r'\bmodule\b.*\bendmodule\b', text, re.DOTALL))
+
+def analyze_hdl(user_input, model="deepseek-r1-distill-llama-70b"):
+    # Determine the input type
+    input_type = "verilog_code" if is_verilog_code(user_input) else "design_question"
+
     prompt = f"""
 You are an expert digital IC design engineer and technical writer.
-Given the following input (which may be Verilog HDL or a conceptual design question), provide your response in JSON format like this:
+
+The following input is of type: {input_type}
+
+Return your response STRICTLY in this JSON format:
 {{
     "type": "code_explanation" or "design_question",
     "summary": "Brief explanation of what the code does or answer to the question.",
-    "code_comments": "If code, add detailed line-by-line commentary.",
+    "code_comments": "If input is Verilog HDL, add detailed line-by-line commentary.",
     "additional_notes": "Optional - design tips, common mistakes, related concepts."
 }}
+
+Rules:
+- Do NOT include any markdown or code fences
+- Do NOT include any narrative explanation or internal reasoning (like <think>...</think>)
+- ONLY return valid JSON
+- If the input is code, set type = "code_explanation"
+- If it's a question, set type = "design_question"
+
 Input: {user_input}
     """
+    response = call_llm(prompt, model=model)
 
-    response = ollama.chat(
-        model = model,
-        messages = [
-            {"role": "user", "content": prompt}
-        ],
-    )
-    return response["message"]["content"]
+    # FIX: If response is string, return it directly
+    if isinstance(response, str):
+        return response
+
+    # If it's a dictionary as expected
+    if isinstance(response, dict) and "message" in response and "content" in response["message"]:
+        return response["message"]["content"]
+
+    # Fallback: dump whole response
+    return str(response)
 
 st.set_page_config(page_title="HDL Assistant", layout="wide")
 st.title("HDL Assistant")
@@ -52,9 +85,9 @@ else:
 if st.button("Submit") and user_input:
     with st.spinner("Analyzing..."):
         try:
-            raw_output = analyze_hdl(user_input)
+            raw_output = strip_narrative_text(analyze_hdl(user_input))
             try:
-                parsed = json.loads(raw_output)
+                parsed = json.loads(raw_output.strip())
                 st.success("Assistant response:")
                 st.subheader("Summary")
                 st.markdown(parsed.get("summary", ""))
@@ -67,6 +100,7 @@ if st.button("Submit") and user_input:
                 st.download_button("Download JSON", data=json.dumps(parsed, indent=2), file_name="hdl_explanation.json")
             except json.JSONDecodeError:
                 st.warning("Could not parse structured output. Showing raw response instead:")
-                st.markdown(raw_output)
+                cleaned_raw_output = strip_narrative_text(raw_output)
+                st.markdown(cleaned_raw_output)
         except Exception as e:
             st.error(f"Error: {e}")

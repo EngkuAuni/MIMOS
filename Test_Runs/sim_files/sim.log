@@ -1,0 +1,16 @@
+=== Compile Output ===
+
+=== Simulation Output ===
+VCD info: dumpfile sim_files/wave.vcd opened for output.
+Time=0 | tx=1 | busy=0
+Time=35 | tx=1 | busy=1
+Time=45 | tx=0 | busy=1
+Time=55 | tx=1 | busy=1
+Time=65 | tx=0 | busy=1
+Time=75 | tx=1 | busy=1
+Time=85 | tx=0 | busy=1
+Time=105 | tx=1 | busy=1
+Time=115 | tx=0 | busy=1
+Time=125 | tx=1 | busy=1
+Time=145 | tx=1 | busy=0
+sim_files/testbench.v:30: $finish called at 240 (1s)

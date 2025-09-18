@@ -2,7 +2,7 @@
 
 ### Project: HDL Assistant — GenAI for IC Design Support
 
-This week focused on developing a local GenAI-powered HDL assistant that can help generate HDL code, IC design documentation, and answer design queries.
+week 4 draft
 
 - fine tuned the model (added filters to get better outputs)
 - improved UI and practicallity of the app
