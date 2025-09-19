@@ -1,2 +1,23 @@
 #venvs
+QuranVerf/# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
 QuranVerf/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Data files (if large)
+*.db
+*.sql
+Data/
+
