@@ -21,3 +21,5 @@ __pycache__/
 # OS-specific files
 .DS_Store
 Thumbs.db
+..bfg-report/2025-09-19/11-05-59/cache-stats.txt
+..bfg-report/2025-09-19/11-05-59/object-id-map.old-new.txt
