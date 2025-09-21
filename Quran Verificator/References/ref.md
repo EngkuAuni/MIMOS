@@ -46,7 +46,7 @@ Quran.com ([Repos](https://github.com/quran))
 4. Display Results
     - Exact Match – a green “Verified (Edition X)” badge, Surah/Ayah, page number, and the two SHA‑256 checksums.
     - Near‑Match – a side‑by‑side HTML diff (red deletions, green insertions) plus a confidence %.
-    - Explanation – an LLM‑generated paragraph (see section 9) that tells the user why the two texts differ (missing shadda, different waqf sign, printing error, OCR glitch, edition‑specific glyph, …).
+    - Explanation – an LLM‑generated paragraph that tells the user why the two texts differ (missing shadda, different waqf sign, printing error, OCR glitch, edition‑specific glyph, …).
     - No Match – a friendly prompt to retake the photo, choose a different edition, or send the image for human review.
 
 5. Review & Retry
