@@ -1,10 +1,11 @@
-#venvs
-QuranVerf/# Python
+# Python
 __pycache__/
 *.py[cod]
 *.class
 *.so
 .Python
+
+# Virtual environments
 env/
 venv/
 ENV/
@@ -19,6 +20,21 @@ QuranVerf/
 # Data files (if large)
 *.db
 *.sql
-Data/
+# Keep canonical SQL dump
+!Data/Tanzil_quran-uthmani.sql  
 
+# PDF/Reports
+*.pdf
 ..bfg-report/
+
+# Streamlit
+.streamlit/
+
+# Logs & temp
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Environment and secrets
+.env

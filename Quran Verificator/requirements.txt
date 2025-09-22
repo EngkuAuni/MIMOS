@@ -11,7 +11,7 @@ opencv-python      # Image preprocessing, ORB feature matching
 # OCR (Fallback)
 kraken       # optimized for Uthmani script
 torch==1.13.1      # Use Apple's MPS backend or CPU
-# Requires Python 3.8–3.10 for torch==1.10.2 and kraken
+# Requires Python 3.8–3.10 for torch==1.10.2 and kraken -- currently using 3.10.18
 
 # Text Similarity
 rapidfuzz        # Fast Levenshtein / edit distance for fuzzy text matching

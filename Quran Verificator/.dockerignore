@@ -1,0 +1,41 @@
+# Byte-compiled / Python cache
+__pycache__/
+*.py[cod]
+*.so
+*.class
+.Python
+
+# Virtual environments
+env/
+venv/
+ENV/
+QuranVerf/
+
+# System files
+.DS_Store
+
+# Editor configs
+.vscode/
+.idea/
+
+# Streamlit artifacts
+.streamlit/
+
+# Build artifacts and temp files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Data files (keeps canonical SQL, ignores others)
+*.db
+*.sql
+!Data/Tanzil_quran-uthmani.sql
+Data/
+
+# PDF and report outputs
+*.pdf
+.bfg-report/
+
+# Environment and secrets
+.env
