@@ -38,3 +38,9 @@ QuranVerf/
 
 # Environment and secrets
 .env
+
+# Docker backup scripts
+save_image.sh
+load_image.sh
+docker_img_backup
+*.tar

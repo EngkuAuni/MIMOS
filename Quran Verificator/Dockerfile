@@ -1,7 +1,7 @@
-# Use Python slim base image compatible with ARM (M1)
+# Python slim base image compatible with ARM (M1)
 FROM python:3.10-slim
 
-# Set environment variables
+# Environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -27,8 +27,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy project files into container
 COPY . .
 
-# Expose Streamlit port (optional: if you're using Streamlit)
+# Expose Streamlit port
 EXPOSE 8501
 
-# Run the app (update this if you're not using Streamlit)
+# Run the app
 CMD ["streamlit", "run", "app/main.py"]
