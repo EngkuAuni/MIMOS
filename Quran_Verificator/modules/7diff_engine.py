@@ -1,0 +1,1 @@
+# Generates diff between texts
