@@ -1,15 +1,18 @@
+# Database op
+sqlalchemy==2.0.20
+
 # UI and Web Interface
-streamlit        # Interactive frontend for the app
+streamlit==1.27.0        # Interactive frontend for the app
 
 # PDF & Image Handling
-pdf2image        # Convert PDF pages to images
-pillow           # Image loading, resizing, format conversion
+pdf2image           # Convert PDF pages to images
+pillow==10.0.0      # Image loading, resizing, format conversion
 
 # Computer Vision
-opencv-python      # Image preprocessing, ORB feature matching
+opencv-python==4.8.0.76      # Image preprocessing, ORB feature matching
 
 # OCR (Fallback)
-kraken       # optimized for Uthmani script
+kraken==4.3.0      # optimized for Uthmani script
 torch==1.13.1      # Use Apple's MPS backend or CPU
 # Requires Python 3.8–3.10 for torch==1.10.2 and kraken -- currently using 3.10.18
 
@@ -17,15 +20,21 @@ torch==1.13.1      # Use Apple's MPS backend or CPU
 rapidfuzz        # Fast Levenshtein / edit distance for fuzzy text matching
 
 # Core Numerical Operations
-numpy          # Used across feature matching, descriptor handling, image arrays
+numpy==1.24.3          # Used across feature matching, descriptor handling, image arrays
+pandas==2.0.3
 
 # PDF Export
-weasyprint         # (Optional) HTML → PDF export for verification reports
+weasyprint==59.0         # (Optional) HTML → PDF export for verification reports
 reportlab          # (Alternative) Manual PDF generation if WeasyPrint fails
+arabic-reshaper    # Reshapes Arabic for correct display (PDFs/UI)
+python-bidi        # Fixes RTL text direction for reshaped Arabic
 
 # HTML Parsing / Cleaning
 beautifulsoup4     # Clean up HTML output (e.g., diffs, UI rendering)
-html2text   # Converts HTML diff output to plaintext if needed
+html2text          # Converts HTML diff output to plaintext if needed
+
+# LLM 
+ollama==0.1.5
 
 # (Optional/To Add Later)
 # llama-cpp-python      # For running small LLMs locally (e.g., Phi-3, Mistral)
