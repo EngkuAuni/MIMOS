@@ -19,7 +19,7 @@ UART is commonly used in satellite subsystems for:
 	•	Redundant backup links
 
 
-## HDL Code
+## HDL Code Example
 
 module uart_tx (
     input clk,
@@ -76,7 +76,7 @@ module uart_tx (
     end
 endmodule
 
-## Testbench
+## Testbench Code Example
 
 module tb_uart_tx;
     reg clk = 0;

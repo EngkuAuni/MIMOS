@@ -115,7 +115,7 @@ quran_verificator/
 │   └── assets/
 │       ├── images/            # Reference page images
 │       └── orb/               # Pre-computed ORB descriptors
-└── src/
+└── modules/
     ├── __init__.py
     ├── preprocessing.py       # Image preprocessing
     ├── matching.py            # Page matching

@@ -1,4 +1,4 @@
-## Handles prompt sending via Groq and lets you change models easily
+## Handles prompt sending via Groq
 
 import os
 from dotenv import load_dotenv

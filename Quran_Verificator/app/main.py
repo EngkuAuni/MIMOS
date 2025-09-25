@@ -10,9 +10,11 @@ import numpy as np
 from kraken import binarization, pageseg, rpred
 from pdf2image import convert_from_path
 from pathlib import Path
+from modules.normalizer import ArabicNormalizer
+from modules.verifier6 import TextVerifier
 
 # --- Constants ---
-DB_PATH = "quran_ref.db"
+DB_PATH = "Data/Tanzil_quran-uthmani.sql"
 KR_MODEL = "default"  # Use "default" or replace with your custom model path
 
 # --- Normalization Rules ---
@@ -29,16 +31,13 @@ WAQF_RE = re.compile(f"[{re.escape(WAQF_SIGNS)}]")
 ZW_RE = re.compile(f"[{re.escape(ZERO_WIDTH)}]")
 TATWEEL_RE = re.compile(f"[{re.escape(TATWEEL)}]")
 
+normalizer = ArabicNormalizer()
 def normalize_uthmani(text: str) -> str:
-    text = unicodedata.normalize("NFC", text)
-    text = ZW_RE.sub("", text)
-    text = TATWEEL_RE.sub("", text)
-    text = WAQF_RE.sub("", text)
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
+    return normalizer.normalize(text)
 
-def hash_norm(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+verifier = TextVerifier()
+def compute_hash(text: str) -> str:
+    return verifier.compute_hash(text)
 
 # --- OCR with Kraken (FIXED) ---
 def run_ocr_kraken(img_pil: Image.Image) -> str:
@@ -64,7 +63,7 @@ def lookup_hash(hash_val: str):
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         row = cursor.execute(
-            "SELECT sura, aya FROM ayah WHERE sha256_norm = ?", (hash_val,)
+            "SELECT sura, aya FROM ayah_hash WHERE hash_full = ?", (hash_val,)
         ).fetchone()
         conn.close()
         return row
@@ -100,7 +99,7 @@ if uploaded_file:
     with st.spinner("🔍 Running OCR and verifying..."):
         ocr_text = run_ocr_kraken(img_pil)
         norm_text = normalize_uthmani(ocr_text)
-        hash_val = hash_norm(norm_text)
+        hash_val = compute_hash(norm_text)
         result = lookup_hash(hash_val)
 
     st.markdown("---")

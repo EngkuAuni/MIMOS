@@ -2,7 +2,8 @@
 
 import hashlib
 import difflib
-from src.normalizer import ArabicNormalizer
+from modules.normalizer5 import ArabicNormalizer
+from modules.verifier6 import TextVerifier  
 
 class TextVerifier:
     """Verify Quran text against reference database."""

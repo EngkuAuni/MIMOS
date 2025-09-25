@@ -69,9 +69,8 @@ class QuranDatabase:
         conn.close()
         
         # After importing text data, compute and store hashes
-        from src.normalizer import ArabicNormalizer
-        from src.verifier import TextVerifier
-        
+        from modules.normalizer5 import ArabicNormalizer
+        from modules.verifier6 import TextVerifier      
         normalizer = ArabicNormalizer()
         verifier = TextVerifier()
         
@@ -155,11 +154,8 @@ class QuranDatabase:
         # This is a simplified implementation for demonstration purposes
         # In a real system, you'd use more sophisticated algorithms
         
-        from src.normalizer import ArabicNormalizer
         import difflib
-        
-        normalizer = ArabicNormalizer()
-        
+                
         conn = self.get_connection()
         all_ayahs = pd.read_sql("SELECT sura, aya, text FROM quran_text", conn)
         conn.close()

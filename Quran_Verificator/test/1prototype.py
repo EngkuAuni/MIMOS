@@ -14,6 +14,8 @@ from PIL import Image
 import easyocr
 from rapidfuzz import process, fuzz
 from difflib import HtmlDiff
+from modules.normalizer import ArabicNormalizer
+normalizer = ArabicNormalizer()
 
 # ------------------------------------------------------------------
 # 1️⃣ Load / initialise the verified Qur’an database
@@ -33,14 +35,7 @@ ARABIC_NORMALIZATION_TABLE = str.maketrans({
 DIACRITICS_REGEX = re.compile(r"[\u0610-\u061A\u064B-\u065F\u06D6-\u06ED]")  # Arabic diacritics range
 
 def normalize_arabic(text: str, drop_diacritics: bool = False) -> str:
-    """Return a canonical version of an Arabic string."""
-    txt = text.translate(ARABIC_NORMALIZATION_TABLE)
-    txt = txt.replace("\u200F", "").replace("\u200E", "")  # remove L/R marks
-    if drop_diacritics:
-        txt = DIACRITICS_REGEX.sub("", txt)
-    # Collapse multiple spaces
-    txt = re.sub(r"\s+", " ", txt).strip()
-    return txt
+    return normalizer.normalize(text, drop_diacritics=drop_diacritics)
 
 def sha256_checksum(text: str) -> str:
     """SHA‑256 hash of the UTF‑8 encoded text."""

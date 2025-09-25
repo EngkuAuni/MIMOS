@@ -1,3 +1,5 @@
+## Needs updating 
+
 # HDL Assistant: A GenAI Tool for Verilog Code, Documentation, and IC Design Queries
 
 This project is part of my GenAI internship initiative at MIMOS Berhad under the direction of Dr. Zulaikha. The overall objective is to develop generative AI applications across several domains. One of the proposed Proof-of-Concept (PoC) projects involves creating a GenAI assistant to support **integrated circuit (IC) design tasks**, including:

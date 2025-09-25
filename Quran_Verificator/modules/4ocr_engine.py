@@ -29,6 +29,8 @@ class OCREngine:
         except:
             # Fallback to default model if arabic model not available
             self.model = models.load_any("default")
+
+            
     
     def recognize(self, image):
         """Perform OCR on an image."""
