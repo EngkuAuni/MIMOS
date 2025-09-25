@@ -5,7 +5,7 @@ import sqlite3
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-class QuranDatabase:
+class QuranDatabase: 
     def __init__(self, db_path="Data/Tanzil_quran-uthmani.sql"):
         """Initialize the database connection."""
         self.db_path = db_path
