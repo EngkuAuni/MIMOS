@@ -1,3 +1,5 @@
+## MySQL dump file -> converted to SQLite /Data/quran.db
+
 -- phpMyAdmin SQL Dump
 -- version 2.11.4
 -- http://www.phpmyadmin.net

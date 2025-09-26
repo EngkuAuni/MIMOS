@@ -12,7 +12,7 @@ from modules.verifier import TextVerifier
 from modules.ocr_engine import OCREngine
 
 # Constants 
-DB_PATH = "Data/Tanzil_quran-uthmani.sql"
+db_path = "Data/quran.db"
 
 class QuranVerificator:
     """Main application class for Quran Verification Engine."""
@@ -67,7 +67,7 @@ class QuranVerificator:
     def lookup_hash(self, hash_val):
         """Look up a hash value in the database."""
         try:
-            conn = sqlite3.connect(DB_PATH)
+            conn = sqlite3.connect(db_path)
             cursor = conn.cursor()
             row = cursor.execute(
                 "SELECT sura, aya FROM ayah_hash WHERE hash_full = ?", (hash_val,)
@@ -106,10 +106,10 @@ if uploaded_file:
             st.subheader("📜 OCR Output")
             st.code(result["ocr_text"] or "[No text detected]")
             
-            st.subheader("🧼 Normalized Text")
+            st.subheader("Normalized Text")
             st.code(result["norm_text"] or "[Normalization failed]")
             
-            st.subheader("🔐 SHA-256 Hash")
+            st.subheader("SHA-256 Hash")
             st.code(result["hash_val"])
             
             st.subheader("✅ Verification Result")
