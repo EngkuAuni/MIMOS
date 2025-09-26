@@ -1,5 +1,6 @@
 # Database op
 sqlalchemy==2.0.20
+pandas==2.0.3
 
 # UI and Web Interface
 streamlit==1.27.0        # Interactive frontend for the app
@@ -17,21 +18,18 @@ torch==1.13.1      # Use Apple's MPS backend or CPU
 # Requires Python 3.8–3.10 for torch==1.10.2 and kraken -- currently using 3.10.18
 
 # Text Similarity
-rapidfuzz        # Fast Levenshtein / edit distance for fuzzy text matching
+rapidfuzz>=3.0.0        # Fast Levenshtein / edit distance for fuzzy text matching
 
 # Core Numerical Operations
 numpy==1.24.3          # Used across feature matching, descriptor handling, image arrays
-pandas==2.0.3
 
 # PDF Export
 weasyprint==59.0         # (Optional) HTML → PDF export for verification reports
-reportlab          # (Alternative) Manual PDF generation if WeasyPrint fails
-arabic-reshaper    # Reshapes Arabic for correct display (PDFs/UI)
-python-bidi        # Fixes RTL text direction for reshaped Arabic
+arabic-reshaper>=3.0.0    # Reshapes Arabic for correct display (PDFs/UI)
+python-bidi>=0.4.2        # Fixes RTL text direction for reshaped Arabic
 
 # HTML Parsing / Cleaning
-beautifulsoup4     # Clean up HTML output (e.g., diffs, UI rendering)
-html2text          # Converts HTML diff output to plaintext if needed
+beautifulsoup4>=4.12.0     # Clean up HTML output (e.g., diffs, UI rendering)
 
 # LLM 
 ollama==0.1.5

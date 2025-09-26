@@ -3,13 +3,17 @@
 import os
 import cv2
 import numpy as np
-import pickle
 
 class PageMatcher:
     """Match a page to a reference database using ORB features."""
     
     def __init__(self, descriptors_dir="Data/assets/orb"):
-        """Initialize with the directory containing ORB descriptors."""
+        """
+        Initialize with the directory containing ORB descriptors.
+        
+        Args:
+            descriptors_dir (str): Path to the descriptors directory
+        """
         self.descriptors_dir = descriptors_dir
         self.matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
         self.orb = cv2.ORB_create()
@@ -18,7 +22,12 @@ class PageMatcher:
         self.reference_descriptors = self._load_descriptors()
     
     def _load_descriptors(self):
-        """Load precomputed ORB descriptors from files."""
+        """
+        Load precomputed ORB descriptors from files.
+        
+        Returns:
+            dict: Dictionary of descriptors by edition and page
+        """
         descriptors = {}
         
         # Create directory if it doesn't exist
@@ -64,12 +73,28 @@ class PageMatcher:
         return descriptors
     
     def extract_features(self, image):
-        """Extract ORB features from an image."""
+        """
+        Extract ORB features from an image.
+        
+        Args:
+            image: Image to extract features from
+            
+        Returns:
+            tuple: (keypoints, descriptors)
+        """
         keypoints, descriptors = self.orb.detectAndCompute(image, None)
         return keypoints, descriptors
     
     def save_descriptors(self, edition, page, keypoints, descriptors):
-        """Save ORB descriptors to a file."""
+        """
+        Save ORB descriptors to a file.
+        
+        Args:
+            edition (str): Edition name
+            page (int): Page number
+            keypoints: ORB keypoints
+            descriptors: ORB descriptors
+        """
         # Create directory if it doesn't exist
         os.makedirs(self.descriptors_dir, exist_ok=True)
         
@@ -99,7 +124,13 @@ class PageMatcher:
     def match_page(self, query_image, threshold=0.7):
         """
         Match a query image to the reference database.
-        Returns (edition, page, similarity) or None if no match is found.
+        
+        Args:
+            query_image: Image to match
+            threshold (float): Minimum similarity threshold (0.0 to 1.0)
+            
+        Returns:
+            tuple: (edition, page, similarity) or None if no match is found
         """
         # Extract features from query image
         query_keypoints, query_descriptors = self.extract_features(query_image)

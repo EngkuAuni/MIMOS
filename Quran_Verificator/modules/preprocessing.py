@@ -1,4 +1,4 @@
-# Contains image proceesing functions
+# Image preprocessing functionality
 
 import cv2
 import numpy as np
@@ -8,16 +8,18 @@ class ImagePreprocessor:
     """Preprocess images for OCR and feature extraction."""
     
     def __init__(self):
+        """Initialize the image preprocessor."""
         pass
     
     def process_image(self, image_path):
         """
-        Process an image for OCR and feature extraction:
-        1. Load image
-        2. Deskew
-        3. Denoise
-        4. Binarize
-        5. Auto-crop (if needed)
+        Process an image for OCR and feature extraction.
+        
+        Args:
+            image_path (str): Path to the image file
+            
+        Returns:
+            dict: Dictionary of processed images
         """
         # Load image
         image = cv2.imread(image_path)
@@ -53,9 +55,21 @@ class ImagePreprocessor:
         }
     
     def _deskew(self, image):
-        """Deskew an image by detecting the orientation."""
-        # Calculate skew angle
+        """
+        Deskew an image by detecting the orientation.
+        
+        Args:
+            image (numpy.ndarray): Grayscale image
+            
+        Returns:
+            numpy.ndarray: Deskewed image
+        """
+        # Find non-zero points
         coords = np.column_stack(np.where(image > 0))
+        if len(coords) <= 10:  # Not enough points
+            return image
+            
+        # Calculate skew angle
         angle = cv2.minAreaRect(coords)[-1]
         
         # Adjust angle
@@ -73,10 +87,20 @@ class ImagePreprocessor:
         return rotated
     
     def _auto_crop(self, image):
-        """Auto-crop an image by detecting and removing margins."""
+        """
+        Auto-crop an image by detecting and removing margins.
+        
+        Args:
+            image (numpy.ndarray): Binary image
+            
+        Returns:
+            numpy.ndarray: Cropped image
+        """
         # Find all non-zero points
         coords = cv2.findNonZero(image)
-        
+        if coords is None:  # Empty image
+            return image
+            
         # Get bounding box
         x, y, w, h = cv2.boundingRect(coords)
         
@@ -84,7 +108,3 @@ class ImagePreprocessor:
         cropped = image[y:y+h, x:x+w]
         
         return cropped
-    
-    def extract_region(self, image, x, y, w, h):
-        """Extract a region from an image."""
-        return image[y:y+h, x:x+w]

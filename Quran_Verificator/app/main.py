@@ -1,76 +1,87 @@
 import streamlit as st
 import sqlite3
 import tempfile
-import unicodedata
-import re
-import hashlib
-from PIL import Image
-import cv2
-import numpy as np
-from kraken import binarization, pageseg, rpred
-from pdf2image import convert_from_path
+import os
 from pathlib import Path
+from PIL import Image
+from pdf2image import convert_from_path
+
+# Engine Modules
 from modules.normalizer import ArabicNormalizer
-from modules.verifier6 import TextVerifier
+from modules.verifier import TextVerifier
+from modules.ocr_engine import OCREngine
 
-# --- Constants ---
+# Constants 
 DB_PATH = "Data/Tanzil_quran-uthmani.sql"
-KR_MODEL = "default"  # Use "default" or replace with your custom model path
 
-# --- Normalization Rules ---
-WAQF_SIGNS = ''.join([
-    '\u06d6', '\u06d7', '\u06d8', '\u06d9', '\u06da', '\u06db', '\u06dc',
-    '\u06dd', '\u06de', '\u06df', '\u06e0', '\u06e1', '\u06e2', '\u06e3',
-    '\u06e4', '\u06e5', '\u06e6', '\u06e7', '\u06e8', '\u06e9', '\u06ea',
-    '\u06eb', '\u06ec', '\u06ed'
-])
-ZERO_WIDTH = '\u200c\u200d\ufeff'
-TATWEEL = '\u0640'
-
-WAQF_RE = re.compile(f"[{re.escape(WAQF_SIGNS)}]")
-ZW_RE = re.compile(f"[{re.escape(ZERO_WIDTH)}]")
-TATWEEL_RE = re.compile(f"[{re.escape(TATWEEL)}]")
-
-normalizer = ArabicNormalizer()
-def normalize_uthmani(text: str) -> str:
-    return normalizer.normalize(text)
-
-verifier = TextVerifier()
-def compute_hash(text: str) -> str:
-    return verifier.compute_hash(text)
-
-# --- OCR with Kraken (FIXED) ---
-def run_ocr_kraken(img_pil: Image.Image) -> str:
-    try:
-        bin_img = binarization.nlbin(img_pil)
-        seg = pageseg.segment(bin_img)
+class QuranVerificator:
+    """Main application class for Quran Verification Engine."""
+    
+    def __init__(self):
+        """Initialize components."""
+        self.normalizer = ArabicNormalizer()
+        self.verifier = TextVerifier()
+        self.ocr_engine = OCREngine()
+    
+    def process_file(self, uploaded_file):
+        """Process an uploaded file (image or PDF)."""
+        # Create a temporary file to work with
+        with tempfile.NamedTemporaryFile(delete=False, suffix=Path(uploaded_file.name).suffix) as tmp:
+            tmp.write(uploaded_file.read())
+            tmp_path = tmp.name
         
-        # Get the bounds from segmentation result
-        bounds = seg['boxes']
-        
-        # Pass bounds to rpred properly
-        preds = rpred.rpred(KR_MODEL, bin_img, bounds)
-        
-        return ''.join([r.prediction for r in preds])
-    except Exception as e:
-        import traceback
-        trace = traceback.format_exc()
-        return f"[OCR ERROR] {str(e)}\n{trace}"
+        try:
+            # Handle PDF → image conversion
+            if uploaded_file.type == "application/pdf":
+                st.info("📄 PDF detected. Converting first page to image...")
+                pages = convert_from_path(tmp_path, dpi=350)
+                img_pil = pages[0]
+            else:
+                img_pil = Image.open(tmp_path).convert("RGB")
+            
+            # Run OCR
+            ocr_text = self.ocr_engine.recognize(img_pil)
+            
+            # Normalize and hash the text
+            norm_text = self.normalizer.normalize(ocr_text)
+            hash_val = self.verifier.compute_hash(norm_text)
+            
+            # Look up the hash in the database
+            result = self.lookup_hash(hash_val)
+            
+            # Clean up temporary file
+            os.unlink(tmp_path)
+            
+            return {
+                "image": img_pil,
+                "ocr_text": ocr_text,
+                "norm_text": norm_text,
+                "hash_val": hash_val,
+                "result": result
+            }
+        except Exception as e:
+            # Clean up on error
+            os.unlink(tmp_path)
+            raise e
+    
+    def lookup_hash(self, hash_val):
+        """Look up a hash value in the database."""
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            row = cursor.execute(
+                "SELECT sura, aya FROM ayah_hash WHERE hash_full = ?", (hash_val,)
+            ).fetchone()
+            conn.close()
+            return row
+        except Exception as e:
+            st.error(f"Database error: {str(e)}")
+            return None
 
-# --- DB Lookup ---
-def lookup_hash(hash_val: str):
-    try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        row = cursor.execute(
-            "SELECT sura, aya FROM ayah_hash WHERE hash_full = ?", (hash_val,)
-        ).fetchone()
-        conn.close()
-        return row
-    except Exception as e:
-        return None
+# Initialize application
+verificator = QuranVerificator()
 
-# --- Streamlit UI ---
+# Streamlit UI setup
 st.set_page_config(page_title="Quran Verification Engine", layout="wide")
 st.title("📜 Quran Verification Engine (Uthmani Edition)")
 
@@ -82,44 +93,36 @@ against a canonical Uthmani database.
 uploaded_file = st.file_uploader("📤 Upload Image or PDF", type=["jpg", "jpeg", "png", "pdf"])
 
 if uploaded_file:
-    with tempfile.NamedTemporaryFile(delete=False, suffix=Path(uploaded_file.name).suffix) as tmp:
-        tmp.write(uploaded_file.read())
-        tmp_path = tmp.name
+    try:
+        # Process the file
+        result = verificator.process_file(uploaded_file)
+        
+        # Display the image
+        st.image(result["image"], caption="🖼 Uploaded Image", use_container_width=True)
+        
+        # Display OCR and verification results
+        with st.spinner("🔍 Running OCR and verifying..."):
+            st.markdown("---")
+            st.subheader("📜 OCR Output")
+            st.code(result["ocr_text"] or "[No text detected]")
+            
+            st.subheader("🧼 Normalized Text")
+            st.code(result["norm_text"] or "[Normalization failed]")
+            
+            st.subheader("🔐 SHA-256 Hash")
+            st.code(result["hash_val"])
+            
+            st.subheader("✅ Verification Result")
+            if result["result"]:
+                sura, aya = result["result"]
+                st.success(f"✅ **Verified (Uthmani)** – Surah {sura}, Ayah {aya}")
+            else:
+                st.warning("⚠️ **No exact match found.** This might be due to OCR noise, different edition, or a real textual difference.")
+    
+    except Exception as e:
+        st.error(f"Error processing file: {str(e)}")
 
-    # Handle PDF → image conversion
-    if uploaded_file.type == "application/pdf":
-        st.info("📄 PDF detected. Converting first page to image...")
-        pages = convert_from_path(tmp_path, dpi=350)
-        img_pil = pages[0]
-    else:
-        img_pil = Image.open(tmp_path).convert("RGB")
-
-    st.image(img_pil, caption="🖼 Uploaded Image", use_container_width=True)
-
-    with st.spinner("🔍 Running OCR and verifying..."):
-        ocr_text = run_ocr_kraken(img_pil)
-        norm_text = normalize_uthmani(ocr_text)
-        hash_val = compute_hash(norm_text)
-        result = lookup_hash(hash_val)
-
-    st.markdown("---")
-    st.subheader("📜 OCR Output")
-    st.code(ocr_text or "[No text detected]")
-
-    st.subheader("🧼 Normalized Text")
-    st.code(norm_text or "[Normalization failed]")
-
-    st.subheader("🔐 SHA-256 Hash")
-    st.code(hash_val)
-
-    st.subheader("✅ Verification Result")
-    if result:
-        sura, aya = result
-        st.success(f"✅ **Verified (Uthmani)** – Surah {sura}, Ayah {aya}")
-    else:
-        st.warning("⚠️ **No exact match found.** This might be due to OCR noise, different edition, or a real textual difference.")
-
-    st.markdown("---")
-    if st.button("🔁 Try Another File"):
-        # FIXED: Use st.rerun() instead of st.experimental_rerun()
-        st.rerun()
+# Add reset button
+st.markdown("---")
+if st.button("🔁 Try Another File"):
+    st.rerun()

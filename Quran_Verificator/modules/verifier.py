@@ -1,9 +1,8 @@
-# Logic for verifying text againts references
+# Verification logic
 
 import hashlib
 import difflib
-from modules.normalizer5 import ArabicNormalizer
-from modules.verifier6 import TextVerifier  
+from modules.normalizer import ArabicNormalizer
 
 class TextVerifier:
     """Verify Quran text against reference database."""
@@ -13,23 +12,29 @@ class TextVerifier:
         self.normalizer = ArabicNormalizer()
     
     def compute_hash(self, text):
-        """Compute SHA-256 hash of a text string."""
+        """
+        Compute SHA-256 hash of a text string.
+        
+        Args:
+            text (str): Text to hash
+            
+        Returns:
+            str: Hexadecimal representation of the SHA-256 hash
+        """
+        if not text:
+            return ""
         return hashlib.sha256(text.encode('utf-8')).hexdigest()
     
     def verify_text(self, ocr_text, db):
         """
         Verify OCR text against reference database.
         
-        Returns a dictionary with the verification results:
-        {
-            'status': 'exact', 'near', or 'no_match',
-            'match_type': 'hash' or 'fuzzy',
-            'with_diacritics': True or False,
-            'ayah': (sura, aya) or None,
-            'text': reference text or None,
-            'similarity': similarity score (for near matches),
-            'fuzzy_matches': list of top fuzzy matches (for no exact match)
-        }
+        Args:
+            ocr_text (str): Text extracted by OCR
+            db: Database connection object
+            
+        Returns:
+            dict: Verification results
         """
         # Normalize text with diacritics
         normalized_text = self.normalizer.normalize(ocr_text)
@@ -100,71 +105,4 @@ class TextVerifier:
             'text': None,
             'similarity': 0.0,
             'fuzzy_matches': fuzzy_matches
-        }
-    
-    def verify_page(self, page, edition, ocr_text, db):
-        """
-        Verify OCR text against a specific page and edition.
-        
-        This is for edition-locked verification, where we know which page
-        and edition we're checking.
-        """
-        # Get ayahs for this page and edition
-        ayahs = db.get_page_ayahs(page, edition)
-        
-        # Normalize OCR text
-        normalized_ocr = self.normalizer.normalize(ocr_text)
-        
-        # Check if the OCR text contains all ayahs
-        all_matched = True
-        matches = []
-        
-        for sura, aya, ref_text in ayahs:
-            normalized_ref = self.normalizer.normalize(ref_text)
-            
-            # Check if normalized_ref is in normalized_ocr
-            if normalized_ref in normalized_ocr:
-                matches.append({
-                    'sura': sura,
-                    'aya': aya,
-                    'text': ref_text,
-                    'status': 'exact',
-                    'similarity': 1.0
-                })
-            else:
-                # Try fuzzy matching
-                similarity = difflib.SequenceMatcher(None, normalized_ocr, normalized_ref).ratio()
-                
-                if similarity >= 0.8:
-                    matches.append({
-                        'sura': sura,
-                        'aya': aya,
-                        'text': ref_text,
-                        'status': 'near',
-                        'similarity': similarity
-                    })
-                else:
-                    matches.append({
-                        'sura': sura,
-                        'aya': aya,
-                        'text': ref_text,
-                        'status': 'no_match',
-                        'similarity': similarity
-                    })
-                
-                all_matched = False
-        
-        # Determine overall status
-        if all_matched:
-            status = 'exact'
-        elif any(m['status'] == 'near' for m in matches):
-            status = 'near'
-        else:
-            status = 'no_match'
-        
-        return {
-            'status': status,
-            'edition': edition,
-            'page': page,
-            'matches': matches
         }

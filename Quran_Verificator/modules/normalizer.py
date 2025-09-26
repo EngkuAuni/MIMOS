@@ -1,4 +1,4 @@
-# Text normalization for Arabic
+# Text normalization
 
 import re
 import unicodedata
@@ -7,8 +7,15 @@ class ArabicNormalizer:
     """Normalize Arabic text for comparison."""
     
     def __init__(self):
+        """Initialize normalization patterns."""
         # Common Arabic diacritics
         self.diacritics = re.compile(r'[\u064B-\u065F\u0670]')
+        
+        # Waqf signs (Quran-specific marks)
+        self.waqf_signs = re.compile(r'[\u06d6-\u06ed]')
+        
+        # Zero-width characters and spaces
+        self.zero_width = re.compile(r'[\u200c\u200d\ufeff]')
         
         # Tatweel character (kashida)
         self.tatweel = re.compile(r'\u0640')
@@ -24,21 +31,31 @@ class ArabicNormalizer:
     
     def normalize(self, text, drop_diacritics=False):
         """
-        Normalize Arabic text:
-        1. NFC normalization
-        2. Remove tatweel (kashida)
-        3. Optionally remove diacritics
-        4. Normalize Hamza forms
+        Normalize Arabic text for consistent comparison.
+        
+        Args:
+            text (str): Arabic text to normalize
+            drop_diacritics (bool): Whether to remove diacritical marks
+            
+        Returns:
+            str: Normalized text
         """
-        # Apply NFC normalization
+        if not text:
+            return ""
+            
+        # Apply NFC normalization (canonical decomposition + canonical composition)
         text = unicodedata.normalize('NFC', text)
         
-        # Remove tatweel
+        # Remove tatweel (elongation character)
         text = self.tatweel.sub('', text)
+        
+        # Remove zero-width characters
+        text = self.zero_width.sub('', text)
         
         # Optionally remove diacritics
         if drop_diacritics:
             text = self.diacritics.sub('', text)
+            text = self.waqf_signs.sub('', text)
         
         # Normalize Hamza forms
         for hamza, replacement in self.hamza_forms.items():
