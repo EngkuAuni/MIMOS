@@ -1,7 +1,6 @@
 # Virtual environment
-Streamlit_env
+Streamlit_env/
 venv/
-.env
 
 # Python cache
 __pycache__/

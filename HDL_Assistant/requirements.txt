@@ -5,6 +5,6 @@ plotly
 scikit-learn
 matplotlib
 watchdog
-Icarus Verilog
 groq
-python-dotenv
+python-dotenv       # Loads environment variables from .env files
+# Icarus Verilog : brew install iverilog / iverilog -v
