@@ -1,3 +1,6 @@
+# One-time run utility script
+# Normalizes quran_text from db and compute SHA-256 hashes for each ayah (with and without diacritics)
+
 import sqlite3
 import os
 from modules.normalizer import ArabicNormalizer

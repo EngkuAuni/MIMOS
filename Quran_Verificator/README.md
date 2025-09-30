@@ -11,7 +11,7 @@ A comprehensive system for verifying Quran text integrity in digital and printed
 
 Quran Verificator is a locally-running application that verifies Quran text against canonical references using computer vision, OCR, and text analysis techniques. It processes images and PDFs containing Quran text, extracts the content, and compares it against verified reference texts from Tanzil.
 
-![System Screenshot](https://via.placeholder.com/800x450.png?text=Quran+Verificator+Screenshot)
+![System Screenshot](https://via.placeholder.com/.....)
 
 ## Features
 

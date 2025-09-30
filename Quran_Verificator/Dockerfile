@@ -1,15 +1,14 @@
 # Python slim base image compatible with ARM (M1/Apple Silicon) and x86
-FROM python:3.10-slim
+FROM --platform=linux/amd64 python:3.10-slim
 
-# Environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONFAULTHANDLER=1
 
-# Set work directory
 WORKDIR /app
+ENV PYTHONPATH="${PYTHONPATH}:/app"
 
-# Install system dependencies in a single layer to reduce image size
+# Install system dependencies (including JP2 support)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libgl1 \
@@ -23,24 +22,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr \
     git \
     curl \
+    libopenjp2-7 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-    
+
 # Copy dependency list first (for better caching)
 COPY requirements.txt .
 
-# Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Create necessary directories
-RUN mkdir -p data/assets/images data/assets/orb
+RUN mkdir -p data/assets/images data/assets/orb models/ocr
 
 # Copy project files into container
 COPY . .
 
-# Expose Streamlit port
+# Download default OCR model if needed (you may need to adjust URL)
+RUN if [ ! -f models/ocr/default.mlmodel ]; then \
+    curl -L https://github.com/mittagessen/kraken/raw/master/kraken/lib/models/default.mlmodel -o models/ocr/default.mlmodel; \
+    fi
+
 EXPOSE 8501
 
-# Run the app
 CMD ["streamlit", "run", "app/main.py", "--server.address=0.0.0.0"]

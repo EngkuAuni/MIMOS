@@ -1,5 +1,6 @@
 # Byte-compiled / Python cache
 __pycache__/
+*.pyc
 *.py[cod]
 *.so
 *.class
@@ -31,7 +32,13 @@ QuranVerf/
 *.db
 *.sql
 !Data/Tanzil_quran-uthmani.sql
-Data/
+
+# Local database and generated assets
+Data/quran.db
+Data/assets/orb_sift/
+Data/assets/images/
+Data/assets/orb/
+Data/reference_imgs/
 
 # PDF and report outputs
 *.pdf

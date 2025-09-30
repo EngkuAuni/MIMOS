@@ -10,15 +10,15 @@ pdf2image           # Convert PDF pages to images
 pillow              # Image loading, resizing, format conversion
 
 # Computer Vision
-opencv-python       # Image preprocessing, ORB feature matching
+opencv-python       # Image preprocessing, ORB feature matching + SIFT 
 
 # OCR (Fallback)
 kraken              # optimized for Uthmani script
-torch               # Use Apple's MPS backend or CPU
-# Requires Python 3.8–3.10 for torch==1.10.2 and kraken -- currently using 3.10.18
+torch               # Compatible with kraken, works with Python 3.8–3.10
 
 # Text Similarity
-rapidfuzz           # Fast Levenshtein / edit distance for fuzzy text matching
+
+#rapidfuzz           # Fast Levenshtein -for upgrade
 
 # Core Numerical Operations
 numpy               # Used across feature matching, descriptor handling, image arrays

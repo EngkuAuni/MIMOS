@@ -1,7 +1,10 @@
 # Resources
 Tanzil ([](https://tanzil.net/download/))
-- Quran text ([Uthmani](../Data/Tanzil_quran-uthmani.sql))
-- Quran text jpg/png by verse ([](https://www.versebyversequran.com))
+- Quran text ([Uthmani](../Data/Tanzil_quran-uthmani.sql)) - by surah & verse for OCR hashing
+- Quran text jpg/png by verse ([](https://www.versebyversequran.com)) - not suitable for whole page ORB+SIFT
+
+Holy Quran Arabic King Fahd Complex ([](https://archive.org/details/holy-quran-arabic-king-fahd-complex-for-printing_20221229/page/n605/mode/2up?utm_source=chatgpt.com))
+- Quran Mushaf by page - ref to generate ORB + SIFT feature descriptors
 
 Qari-OCR ([](https://huggingface.co/NAMAA-Space/Qari-OCR-0.1-VL-2B-Instruct))
 - multimodal VLM model 
@@ -12,103 +15,6 @@ Qari-OCR ([](https://huggingface.co/NAMAA-Space/Qari-OCR-0.1-VL-2B-Instruct))
 Quran.com ([Repos](https://github.com/quran))
 
 ----------------------------------------------------------------------------------------------------------------------
-
-# Current checklist
-	1.	✅ Working Python prototype engine with:
-	•	Upload → Preprocess → Page Match / OCR → Verify → Report
-	2.	✅ SQLite canonical database (text, hashes, page mappings)
-	3.	✅ Sample page images + descriptors for testing
-	4.	✅ UI prototype in Streamlit or FastAPI
-	5.	✅ Optional: Unit tests or CLI version of the engine
-	6.	✅ PDF report generation
-
-🧠 1. Text Integrity Engine (Core of the Quran Checker)
-
-You can:
-	•	✅ Finalize the text normalizer (Uthmani rasm-aware)
-	•	✅ Load the Tanzil DB into SQLite (quran_ref.db)
-	•	✅ Build and test:
-	•	Normalizer → NFC + tatweel + harakat options
-	•	SHA-256 hashing per ayah/surah/full text
-	•	Diff engine → show insertions/deletions (HTML)
-	•	Diacritic-aware fuzzy matcher → Levenshtein distance scoring
-
-🟢 These form the heart of both edition-locked and open-edition verification pipelines.
-
-⸻
-
-📷 2. OCR & Preprocessing Pipeline
-
-With Kraken or Qari-OCR:
-
-You can:
-	•	✅ Integrate image upload → OpenCV pre-processing (deskew, binarize, warp)
-	•	✅ Run Kraken OCR (you already installed it)
-	•	✅ Normalize OCR text → send to integrity engine
-	•	✅ Try optional fallback to Qari-OCR (Hugging Face model)
-
-You can test:
-	•	✅ Whole page OCR
-	•	✅ Region-based OCR
-
-🟢 This enables verification from PDF/photo scans — just like real-world apps.
-
-⸻
-
-💠 3. Edition-Locked Page Matching (Optional)
-
-If you’ve got:
-	•	Reference page images (Madani, Indo-Pak)
-	•	Precomputed ORB descriptors
-
-Then you can:
-	•	✅ Implement and test Page-Match module
-	•	ORB extraction → match against DB → identify edition + page
-	•	✅ Route verified pages to Edition-Locked flow
-
-🔶 Nice to have, but not essential for MVP unless edition/page is needed.
-
-⸻
-
-🧪 4. Build the LLM Explanation Module
-
-You already have Ollama + models (Phi‑3‑mini, Mistral‑7B).
-
-You can:
-	•	✅ Build the prompt templates:
-	•	Show the canonical vs OCR text
-	•	Include diff context
-	•	Ask model: “Explain the discrepancy”
-	•	✅ Run local inference for LLM-generated explanations
-
-🟢 This adds tremendous value during scholarly review.
-
-⸻
-
-🧾 5. HTML→PDF Report Generator
-
-Already in your stack (WeasyPrint, ReportLab).
-
-You can:
-	•	✅ Assemble a report:
-	•	Original image
-	•	OCR output
-	•	Diff table
-	•	Verification badge (exact / near / no match)
-	•	Explanation paragraph
-	•	✅ Export as downloadable PDF
-
-🟢 This can be shown to KDN/JAKIM reviewers or included in certificate requests.
-
-⸻
-
-🔁 6. Review / Feedback Interface
-	•	✅ Build the “Mark as correct/incorrect” buttons
-	•	✅ Store logs in a simple SQLite audit trail
-	•	✅ Log submission metadata (image name, hash, verdict, etc.)
-
-🔵 Lays the groundwork for feedback loops, human review queues, and post-market analysis.
-
 # Overview
 **User Flow**
 1. Upload
@@ -127,7 +33,6 @@ You can:
 	   - User selects a region (or whole page auto‑selected).
 	   - OCR runs on that region using:
 	       - Default: Kraken (fine‑tuned for Uthmānī script).
-	       - Optional: Qari-OCR VLM (multimodal OCR).
 	   - Output: raw Unicode string (Arabic).
 
 3. Verify
@@ -141,8 +46,8 @@ You can:
        - Remove Tatweel, unify Hamza, NFC, optional diacritic removal.
        - Compute SHA‑256 hash → lookup in ayah_hash DB.
            - If exact match → ✅ Identical to Uthmānī.
-           - If no match → fuzzy search:
-            •	Diacritic‑aware Levenshtein distance.
+           - If no match → fuzzy search:   # Current verifier uses database’s get_fuzzy_matches (difflib) --> will upgrade to RapidFuzz
+            •	Diacritic‑aware Levenshtein distance (RapidFuzz)
             •	Top‑K ayah candidates + confidence score.
 
 4. Explain & Display Results
@@ -168,14 +73,13 @@ You can:
 	-	page_map (page, edition, sura, ayah_start, ayah_end)
 	-	Reference page images: assets/images/
 	-	ORB descriptors: assets/orb/*.npz
-	-	VLM models: models/qari_ocr/…
 	-	LLMs: models/llm/ (Phi-3, Mistral, etc.)
 
 2. Core Processing Modules
 	-	OpenCV Pipeline (Pre-processing): deskew → binarize → crop → warp
 	-	ORB Feature Extraction: extract keypoints/descriptors.
 	-	Page Matching: BFMatcher (threshold-based scoring).
-	-	OCR Engine: pluggable (Kraken / Qari-OCR).
+	-	OCR Engine: pluggable (Kraken).
 	-	Hash Lookup: SHA‑256 → ayah DB.
 
 3. Verification & Logic
@@ -212,7 +116,6 @@ You can:
 │   │       ├─ UI lets the user pick a region (or auto‑select the whole page)
 │   │       ├─ Run OCR on the region using the pluggable engine:
 │   │       │   ├─ Default: **Kraken** (Uthmānī‑fine‑tuned)
-│   │       │   └─ Optional: **Qari‑OCR VLM** (multimodal vision‑language)
 │   │       └─ Output: raw Unicode Arabic string
 │   ├─ Verify
 │   │   ├─ *Edition‑Locked Verification*  (page was matched)
@@ -259,7 +162,6 @@ You can:
     │   │   └─ `page_map`    (page, edition, sura, ayah_start, ayah_end)
     │   ├─ Reference page images → `assets/images/`
     │   ├─ Pre‑computed ORB descriptors → `assets/orb/*.npz`
-    │   ├─ Optional VLM weights → `models/qari_ocr/…` (ONNX / ggml)
     │   └─ LLM models & tokenizer → `models/llm/` (Phi‑3, Mistral‑7B, Noor, …)
     │
     ├─ Core Processing Modules
@@ -272,7 +174,6 @@ You can:
     │   ├─ **OCR Engine** (pluggable)
     │   │   ├─ `run_ocr(pil_img, region)` → raw Unicode text
     │   │   ├─ Default: Kraken (Uthmānī‑trained)
-    │   │   └─ Optional: Qari‑OCR VLM (vision‑language)
     │   └─ **Hash‑Lookup Engine**
     │       └─ `lookup_hash(normalised_str)` → (sura, ayah, exact_match?)
     │
@@ -314,7 +215,6 @@ You can:
 │   - page_map (page, edition, ayah range)                    │
 │ • Page images (assets/images/*.png)                         │
 │ • ORB descriptors (assets/orb/*.npz)                        │
-│ • OCR Models (Kraken, Qari-OCR VLM)                         │
 │ • LLM Weights (Phi-3, Mistral, Noor...)                     │
 └─────────────────────────────────────────────────────────────┘
 
@@ -330,7 +230,6 @@ You can:
 │    - Output: edition + page if similarity ≥ threshold       │
 │                                                             │
 │ 3. OCR Engine (fallback):                                   │
-│    - run_ocr() using Kraken or Qari-OCR                     │
 │    - User can select region or use auto-page                │
 │    - Output: raw Arabic Unicode string                      │
 └─────────────────────────────────────────────────────────────┘
@@ -368,3 +267,28 @@ You can:
 │ • PDF Report Builder (WeasyPrint / ReportLab)               │
 │ • Human Review Tools + Audit Logging                        │
 └─────────────────────────────────────────────────────────────┘
+
+
+## Based on KDN Requirements
+# Data
+- Canonical Quran text (From KDN/JAKIM)	
+    - Use Tanzil/Uthmani DB for now (temporary placeholder)
+- Reference images/PDFs	(From certified Quran publications)	
+- Approved corpus hashes (Will be provided later for enforcement)	
+    - Build the hash engine and test it on own normalized version
+- Rules (rasm, tajwid, etc.) (From Lajnah Tashih)	
+    - Don’t need full rules now; just basic normalisation + diacritic modes
+- Sample submission (developers will submit them later)
+    - Use test APK placeholders, dummy binaries, or PDFs
+
+# Tech-stack from “Technical Architecture” section:
+- Frontend: React (for Developer Portal, Reviewer Console)
+- Engines: Python for Text Diff, OCR, Malware, Crawlers     # current
+- APIs: REST / GraphQL (microservices + event bus)
+- Database: PostgreSQL (transactions)       # SQLite for now
+- File Storage: S3-compatible (object store for binaries/docs)      # Local filesystem for now
+- Search/Logs: Elasticsearch / OpenSearch
+- Cache/Queues:	Redis	
+- Security:	PKI, HSM, IAM, audit logs
+- CI/CD: Gated pipelines, SAST/DAST
+- Hosting: MyGovCloud / Cloud Selamat

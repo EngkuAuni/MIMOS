@@ -5,23 +5,11 @@ __pycache__/
 *.so
 .Python
 
-# Virtual environments
-env/
-venv/
-ENV/
-QuranVerf/
-
 # macOS
 .DS_Store
 
 # VS Code
 .vscode/
-
-# Data files (if large)
-*.db
-*.sql
-# Keep canonical SQL dump
-!Data/Tanzil_quran-uthmani.sql  
 
 # PDF/Reports
 *.pdf
@@ -44,3 +32,31 @@ save_image.sh
 load_image.sh
 docker_img_backup
 *.tar
+
+# Python virtual environments
+QuranVerf/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Local database and generated assets
+*.db
+*.sql
+Data/quran.db
+Data/assets/orb_sift/
+Data/assets/images/
+Data/assets/orb/
+
+# Reference images
+Data/reference_imgs/
+
+# Keep canonical SQL dump
+!Data/Tanzil_quran-uthmani.sql  
+
+# Model files
+models/ocr/*.mlmodel

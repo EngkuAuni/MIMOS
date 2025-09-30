@@ -30,12 +30,18 @@ class OCREngine:
             if model_path and os.path.exists(model_path):
                 self.model = models.load_any(model_path)
             else:
-                # Try to load Arabic model first
-                try:
-                    self.model = models.load_any("arabic_best.mlmodel")
-                except:
-                    # Fallback to default model if Arabic model not available
-                    self.model = models.load_any("default")
+                # Try to load models from the models/ocr directory
+                model_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models', 'ocr')
+                model_path = os.path.join(model_dir, 'arabic_best.mlmodel')
+                default_path = os.path.join(model_dir, 'default.mlmodel')
+                
+                if os.path.exists(model_path):
+                    self.model = models.load_any(model_path)
+                elif os.path.exists(default_path):
+                    self.model = models.load_any(default_path)
+                else:
+                    print(f"Warning: No OCR model found in {model_dir}. OCR functionality will be limited.")
+                    self.model = None
         except Exception as e:
             raise RuntimeError(f"Failed to load OCR model: {str(e)}")
     
@@ -50,6 +56,9 @@ class OCREngine:
             str: Extracted text
         """
         try:
+            if self.model is None:
+                return "[OCR Model Not Available]"
+                
             # Ensure image is in PIL format
             if not isinstance(image, Image.Image):
                 image = Image.fromarray(image)
