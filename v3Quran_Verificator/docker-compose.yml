@@ -1,0 +1,45 @@
+services:
+  quran-verifier:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      # Use named volumes for data persistence
+      - quran_database:/app/database
+      - quran_models:/app/models
+      - quran_finetuning:/app/QariOCR_Finetuning
+      - quran_uploads:/app/uploads
+      - quran_reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    # Resource limits to prevent MacBook lag
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'       # Limit to 4 CPU cores
+          memory: 8G         # Limit to 8GB RAM
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Define named volumes
+volumes:
+  quran_database:
+    driver: local
+  quran_models:
+    driver: local
+  quran_finetuning:
+    driver: local
+  quran_uploads:
+    driver: local
+  quran_reports:
+    driver: local
