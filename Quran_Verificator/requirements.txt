@@ -15,9 +15,10 @@ opencv-python       # Image preprocessing, ORB feature matching + SIFT
 # OCR (Fallback)
 kraken              # optimized for Uthmani script
 torch               # Compatible with kraken, works with Python 3.8–3.10
+#Use python 3.10 for kraken compatibility (ensure venv is set up with python 3.10)
 
 # Text Similarity
-
+#difflib             # Built-in, basic fuzzy matching (current fallback)
 #rapidfuzz           # Fast Levenshtein -for upgrade
 
 # Core Numerical Operations
@@ -36,4 +37,3 @@ ollama
 
 # (Optional/To Add Later)
 # llama-cpp-python      # For running small LLMs locally (e.g., Phi-3, Mistral)
-# transformers          # For Qari-OCR or LLM explanation models (if needed)

@@ -50,6 +50,20 @@ class QuranVerificator:
 
             # Convert PIL to OpenCV format for matching
             cv_image = cv2.cvtColor(np.array(img_pil), cv2.COLOR_RGB2GRAY)
+            
+            # Enhance image for better feature detection
+            # 1. Apply CLAHE for better contrast
+            clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8,8))
+            cv_image = clahe.apply(cv_image)
+            
+            # 2. Minimal denoising to preserve text details
+            cv_image = cv2.fastNlMeansDenoising(cv_image, None, h=10, searchWindowSize=21)
+            
+            # 3. Sharpen to enhance edges
+            kernel = np.array([[-0.5,-0.5,-0.5], [-0.5,5,-0.5], [-0.5,-0.5,-0.5]])
+            cv_image = cv2.filter2D(cv_image, -1, kernel)
+            
+            st.image(cv_image, caption="Preprocessed Image", width=300)  # Debug: show preprocessed image
 
             # Preferred method: ORB + SIFT page matching
             match_result = self.page_matcher.match_page(cv_image)
@@ -100,7 +114,7 @@ if uploaded_file:
         result = verificator.process_file(uploaded_file)
 
         # Image display
-        st.image(result["image"], caption="🖼 Uploaded Image", use_container_width=True)
+        st.image(result["image"], caption="🖼 Uploaded Image", width="stretch")
         st.markdown("---")
 
         if result["method"] in ("ORB", "SIFT"):

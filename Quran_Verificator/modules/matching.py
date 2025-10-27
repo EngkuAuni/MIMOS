@@ -15,12 +15,27 @@ class PageMatcher:
             descriptors_dir (str): Path to the descriptors directory
         """
         self.descriptors_dir = descriptors_dir
-        # ORB (fast, binary)
-        self.orb = cv2.ORB_create()
+        # ORB with tuned parameters
+        self.orb = cv2.ORB_create(
+            nfeatures=2000,          # Increase number of features
+            scaleFactor=1.2,         # Smaller scale steps
+            nlevels=8,              # More scale levels
+            edgeThreshold=31,        # Larger edge threshold
+            firstLevel=0,
+            WTA_K=2,                # Use 2 points for orientation
+            patchSize=31,           # Larger patch size
+            fastThreshold=20        # Lower threshold to detect more features
+        )
         self.orb_matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
-        # SIFT (accurate, float)
-        self.sift = cv2.SIFT_create()
+        # SIFT with tuned parameters
+        self.sift = cv2.SIFT_create(
+            nfeatures=0,            # No limit on features
+            nOctaveLayers=5,        # More layers per octave
+            contrastThreshold=0.03,  # Lower threshold to detect more features
+            edgeThreshold=10,       # Lower threshold to detect more edges
+            sigma=1.6              # Increase initial blur
+        )
         self.sift_matcher = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
         
         # Load precomputed descriptors
@@ -52,15 +67,13 @@ class PageMatcher:
                     # ORB
                     orb_keypoints_data = data['orb_keypoints']
                     orb_descriptors_data = data['orb_descriptors']
-                    orb_keypoints = [cv2.KeyPoint(x=kp[0], y=kp[1], _size=kp[2], _angle=kp[3],
-                                                  _response=kp[4], _octave=int(kp[5]), _class_id=int(kp[6]))
+                    orb_keypoints = [cv2.KeyPoint(x=float(kp[0]), y=float(kp[1]), size=32.0)
                                      for kp in orb_keypoints_data]
 
                     # SIFT
                     sift_keypoints_data = data['sift_keypoints']
                     sift_descriptors_data = data['sift_descriptors']
-                    sift_keypoints = [cv2.KeyPoint(x=kp[0], y=kp[1], _size=kp[2], _angle=kp[3],
-                                                  _response=kp[4], _octave=int(kp[5]), _class_id=int(kp[6]))
+                    sift_keypoints = [cv2.KeyPoint(x=float(kp[0]), y=float(kp[1]), size=32.0)
                                      for kp in sift_keypoints_data] 
  
                     
@@ -122,15 +135,18 @@ class PageMatcher:
             'sift_descriptors': sift_descriptors
         }
 
-    def match_page(self, query_image, threshold=0.7):
+    def match_page(self, query_image, threshold=0.5):  # Lowered threshold for testing
         """
-        Match a query image to the reference database usiing ORB and SIFT.            
+        Match a query image to the reference database using ORB and SIFT.            
         Returns (edition, page, similarity, method) or None if no match is found.
         """
         # Extract features from query image
+        print("Extracting features from query image...")
         feats = self.extract_features(query_image)
         orb_kp, orb_desc = feats['orb']
         sift_kp, sift_desc = feats['sift']
+        print(f"Query image features: {len(orb_kp) if orb_kp else 0} ORB keypoints, {len(sift_kp) if sift_kp else 0} SIFT keypoints")
+        
         best_match = None
         best_similarity = 0
         best_method = None
@@ -143,8 +159,21 @@ class PageMatcher:
                 # ORB matching
                 if orb_desc is not None and ref['orb_descriptors'] is not None and len(orb_desc) >= 10 and len(ref['orb_descriptors']) >= 10:
                     matches = self.orb_matcher.match(orb_desc, ref['orb_descriptors'])
-                    good_matches = [m for m in matches if m.distance < 50]
-                    orb_similarity = len(good_matches) / max(len(orb_desc), len(ref['orb_descriptors']))
+                    
+                    # Sort matches by distance
+                    matches = sorted(matches, key=lambda x: x.distance)
+                    
+                    # Take top 75% of matches based on distance
+                    num_good_matches = int(len(matches) * 0.75)
+                    good_matches = matches[:num_good_matches]
+                    
+                    # Filter matches by absolute distance threshold
+                    good_matches = [m for m in good_matches if m.distance < 60]  # Increased distance threshold
+                    
+                    # Calculate similarity based on ratio of good matches to total features
+                    orb_similarity = len(good_matches) / min(len(orb_desc), len(ref['orb_descriptors']))
+                    
+                    print(f"ORB matching with {edition} page {page}: {len(good_matches)} good matches out of {len(matches)} (similarity: {orb_similarity:.3f})")
                     if orb_similarity > best_similarity and orb_similarity >= threshold:
                         best_match = (edition, page, orb_similarity, 'ORB')
                         best_similarity = orb_similarity

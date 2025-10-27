@@ -1,4 +1,4 @@
-# IC Design specifications for a 
+# IC Design specifications
 
 ## User Flow
 [1] User enters spec → HDL is generated
