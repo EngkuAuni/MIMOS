@@ -67,6 +67,10 @@ def comprehensive_hdl_fixes(code):
                   r"integer \1; for (\1 = 0; \1 < \2; \1 = \1 + 1)", code)
     code = re.sub(r"(\d+\.\d+e[+-]?\d+|\d+e[+-]?\d+)",
                   lambda m: str(int(float(m.group(1)))), code)
+    
+    # Fix stray semicolons in parameter declarations (e.g., "= 960;0;" -> "= 960;")
+    code = re.sub(r'=\s*(\d+);\s*0\s*;', r'= \1;', code)
+    code = re.sub(r'(\d+);\s*0\s*;', r'\1;', code)
     code = re.sub(r"(input|output|inout)\s+\[\s*0\s*:\s*0\s*\]\s*(\w+)", r"\1 \2", code)
     code = re.sub(r"(input|output|inout)\s+wire\s+", r"\1 ", code)
 
@@ -301,14 +305,14 @@ MODULE TO TEST:
 
 # --- Generation Functions ---
 
-def generate_hdl_code(spec, model="deepseek-r1-distill-llama-70b"):
+def generate_hdl_code(spec, model="llama-3.1-8b-instant"):
     prompt = HDL_PROMPT_TEMPLATE + "\n\nSpecification:\n" + spec
     raw_code = call_llm(prompt, model=model)
     cleaned_code = strip_narrative_text(raw_code)
     fixed_code = comprehensive_hdl_fixes(cleaned_code)
     return fixed_code
 
-def generate_testbench(hdl_code, model="deepseek-r1-distill-llama-70b"):
+def generate_testbench(hdl_code, model="llama-3.1-8b-instant"):
     prompt = TB_PROMPT_TEMPLATE.format(hdl_code=hdl_code)
     raw_code = call_llm(prompt, model=model)
     cleaned_code = strip_narrative_text(strip_code_fences(raw_code))
@@ -322,6 +326,53 @@ def ensure_module_syntax(code):
     if "endmodule" not in code:
         code += "\nendmodule"
     return code
+
+def fix_testbench_syntax(tb_code):
+    """Fix common testbench syntax issues"""
+    fixes_applied = []
+    
+    # Remove stray semicolons in parameter declarations
+    old_code = tb_code
+    tb_code = re.sub(r'=\s*(\d+);\s*0;', r'= \1;', tb_code)
+    if old_code != tb_code:
+        fixes_applied.append("Fixed stray '0;' in parameter declarations")
+    
+    # Fix double declarations (variable declared as both reg and wire)
+    lines = tb_code.split('\n')
+    seen_vars = {}
+    fixed_lines = []
+    
+    for line in lines:
+        # Check if this line declares a variable
+        reg_match = re.search(r'\breg\s+(?:\[[\d:]+\]\s+)?(\w+)', line)
+        wire_match = re.search(r'\bwire\s+(?:\[[\d:]+\]\s+)?(\w+)', line)
+        
+        if reg_match:
+            var_name = reg_match.group(1)
+            if var_name in seen_vars and seen_vars[var_name] == 'wire':
+                # Skip this line, already declared as wire
+                fixes_applied.append(f"Removed duplicate reg declaration for '{var_name}' (already declared as wire)")
+                continue
+            seen_vars[var_name] = 'reg'
+        elif wire_match:
+            var_name = wire_match.group(1)
+            if var_name in seen_vars and seen_vars[var_name] == 'reg':
+                # Skip this line, already declared as reg
+                fixes_applied.append(f"Removed duplicate wire declaration for '{var_name}' (already declared as reg)")
+                continue
+            seen_vars[var_name] = 'wire'
+        
+        fixed_lines.append(line)
+    
+    tb_code = '\n'.join(fixed_lines)
+    
+    # Fix invalid parameter values like "1;0" to "1"
+    tb_code = re.sub(r'=\s*(\d+);\s*(\d+)\s*;', r'= \1;', tb_code)
+    
+    # Remove extra semicolons after numbers
+    tb_code = re.sub(r'(\d+);\s*(\d+)\s*;', r'\1;', tb_code)
+    
+    return tb_code, fixes_applied
 
 # --- Streamlit Page Layout ---
 
@@ -432,6 +483,15 @@ endmodule
     with st.spinner("Generating testbench..."):
         try:
             raw_tb_code = generate_testbench(hdl_code)
+            
+            # Apply testbench-specific fixes
+            fixed_tb_code, fixes = fix_testbench_syntax(raw_tb_code)
+            if fixes:
+                st.info("🔧 Applied auto-fixes to testbench:")
+                for fix in fixes:
+                    st.text(f"  • {fix}")
+            
+            raw_tb_code = fixed_tb_code
             st.expander("Raw Testbench Output (before fix)").code(raw_tb_code, language="verilog")
             is_valid = raw_tb_code.strip().lower().startswith("module") and "endmodule" in raw_tb_code
             if not re.search(r'\b(initial|always)\b', raw_tb_code):

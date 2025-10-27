@@ -10,7 +10,6 @@ This is a curated list of available LLMs supported by Groq as of September 2025.
 |--------------------------------------|---------------------------------------------------------------|
 | `llama-3.1-8b-instant`               | Fast, small, 131K context — ideal for code and Verilog tasks |
 | `llama-3.3-70b-versatile`            | Powerful, large context, great at structured logic reasoning  |
-| `deepseek-r1-distill-llama-70b`      | Strong syntax-aware model for code generation                |
 
 ---
 
@@ -64,9 +63,8 @@ This is a curated list of available LLMs supported by Groq as of September 2025.
   ```
 
 - For best HDL synthesis output, use:
-  - `llama-3.1-8b-instant` (fast, lean, low-resource)
+  - `llama-3.1-8b-instant` (fast, lean, low-resource) **RECOMMENDED**
   - `llama-3.3-70b-versatile` (deep logic, best quality)
-  - `deepseek-r1-distill-llama-70b` (great middle-ground)
 
 ---
 

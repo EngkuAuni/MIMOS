@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "Streamlit_env",
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-def call_llm(prompt, model="deepseek-r1-distill-llama-70b"):
+def call_llm(prompt, model="llama-3.1-8b-instant"):
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],

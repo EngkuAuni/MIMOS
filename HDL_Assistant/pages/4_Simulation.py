@@ -360,7 +360,7 @@ if st.button("🤖 Explain Simulation Results"):
 {st.session_state.compile_log if st.session_state.compile_log.strip() else "No compilation output."}
 {st.session_state.sim_log if st.session_state.sim_log.strip() else "No simulation output."}
 """
-                response = call_llm(prompt, model="deepseek-r1-distill-llama-70b")
+                response = call_llm(prompt, model="llama-3.1-8b-instant")
                 st.session_state.explanation = response
 
         except ImportError:
@@ -376,6 +376,6 @@ if st.button("🤖 Explain Simulation Results"):
 ##Adds an "Explain Simulation Results" button
 ##When clicked, checks if there are simulation results to explain
 ##If results exist, sends the HDL code, testbench, and logs to the LLM
-##Uses the deepseek-r1-distill-llama-70b model for generating the explanation
+##Uses the llama-3.1-8b-instant model for generating the explanation
 ##Displays the explanation in the UI
 ##Includes error handling for import issues or API failures

@@ -17,36 +17,55 @@ def strip_narrative_text(code):
     
     return code
 
+def extract_json_from_response(text):
+    """Extract JSON from LLM response, handling markdown and other formatting"""
+    text = strip_narrative_text(text)
+    
+    # Try to find JSON object
+    json_match = re.search(r'\{[\s\S]*\}', text)
+    if json_match:
+        json_str = json_match.group(0)
+        try:
+            return json.loads(json_str)
+        except json.JSONDecodeError:
+            pass
+    
+    # Try to parse the whole text
+    try:
+        return json.loads(text.strip())
+    except json.JSONDecodeError:
+        # If JSON parsing fails, create a structured response from text
+        return {
+            "type": "general_response",
+            "summary": text,
+            "code_comments": "",
+            "additional_notes": ""
+        }
+
 def is_verilog_code(text):
     """Simple heuristic to detect Verilog code."""
     return bool(re.search(r'\bmodule\b.*\bendmodule\b', text, re.DOTALL))
 
-def analyze_hdl(user_input, model="deepseek-r1-distill-llama-70b"):
+def analyze_hdl(user_input, model="llama-3.1-8b-instant"):
     # Determine the input type
     input_type = "verilog_code" if is_verilog_code(user_input) else "design_question"
 
-    prompt = f"""
-You are an expert digital IC design engineer and technical writer.
+    prompt = f"""You are an expert digital IC design engineer and technical writer.
 
 The following input is of type: {input_type}
 
-Return your response STRICTLY in this JSON format:
+Return your response STRICTLY in this JSON format (NO markdown, NO code fences, NO extra text):
+
 {{
-    "type": "code_explanation" or "design_question",
+    "type": "{input_type}",
     "summary": "Brief explanation of what the code does or answer to the question.",
     "code_comments": "If input is Verilog HDL, add detailed line-by-line commentary.",
     "additional_notes": "Optional - design tips, common mistakes, related concepts."
 }}
 
-Rules:
-- Do NOT include any markdown or code fences
-- Do NOT include any narrative explanation or internal reasoning (like <think>...</think>)
-- ONLY return valid JSON
-- If the input is code, set type = "code_explanation"
-- If it's a question, set type = "design_question"
+CRITICAL: Return ONLY the JSON object above, nothing else. No markdown, no explanations, no code fences.
 
-Input: {user_input}
-    """
+Input: {user_input}"""
     response = call_llm(prompt, model=model)
 
     # FIX: If response is string, return it directly
@@ -85,22 +104,29 @@ else:
 if st.button("Submit") and user_input:
     with st.spinner("Analyzing..."):
         try:
-            raw_output = strip_narrative_text(analyze_hdl(user_input))
-            try:
-                parsed = json.loads(raw_output.strip())
-                st.success("Assistant response:")
+            raw_output = analyze_hdl(user_input)
+            parsed = extract_json_from_response(raw_output)
+            
+            # Display the response
+            st.success("Assistant response:")
+            
+            # Show summary
+            if parsed.get("summary"):
                 st.subheader("Summary")
-                st.markdown(parsed.get("summary", ""))
-                if parsed.get("code_comments"):
-                    with st.expander("Code Commentary"):
-                        st.code(parsed["code_comments"], language="verilog")
-                if parsed.get("additional_notes"):
-                    with st.expander("Additional Notes"):
-                        st.markdown(parsed["additional_notes"])
-                st.download_button("Download JSON", data=json.dumps(parsed, indent=2), file_name="hdl_explanation.json")
-            except json.JSONDecodeError:
-                st.warning("Could not parse structured output. Showing raw response instead:")
-                cleaned_raw_output = strip_narrative_text(raw_output)
-                st.markdown(cleaned_raw_output)
+                st.markdown(parsed["summary"])
+            
+            # Show code commentary if present
+            if parsed.get("code_comments"):
+                with st.expander("Code Commentary"):
+                    st.code(parsed["code_comments"], language="verilog")
+            
+            # Show additional notes if present
+            if parsed.get("additional_notes"):
+                with st.expander("Additional Notes"):
+                    st.markdown(parsed["additional_notes"])
+            
+            # Download button
+            st.download_button("Download JSON", data=json.dumps(parsed, indent=2), file_name="hdl_explanation.json")
+            
         except Exception as e:
             st.error(f"Error: {e}")
