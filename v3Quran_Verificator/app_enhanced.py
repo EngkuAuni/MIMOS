@@ -93,7 +93,15 @@ def initialize_components():
         text_verifier = TextVerifier()
         structural_verifier = StructuralVerifier()
         semantic_verifier = SemanticVerifier()
-        missing_line_detector = MissingLineDetector()
+        
+        # Initialize QariOCR model for LLM functionality (eager load at startup)
+        ocr_model = QariOCR("models/FT1_QariOCR", fallback_warn=True)
+        
+        # Missing line detector with QariOCR as LLM and TextVerifier for detailed analysis
+        missing_line_detector = MissingLineDetector(
+            ocr_model=ocr_model,
+            text_verifier=text_verifier
+        )
         
         # Initialize UI components
         anomaly_display = AnomalyDisplay()
@@ -112,7 +120,7 @@ def initialize_components():
         # Initialize QariOCR model (cached - loads ONCE at startup)
         # First load takes 5-10 minutes, but then it's cached forever
         with st.spinner("🔄 Loading QariOCR fine-tuned model... First time only, please wait ~5-10 minutes..."):
-            ocr_model = QariOCR("models/FT1_QariOCR", fallback_warn=True)
+            _ = ocr_model
         
         return {
             'model_manager': model_manager,
@@ -212,6 +220,12 @@ def main():
             value=0.85,
             step=0.05
         )
+
+        # Rendering controls (single-page PDF enforced)
+        st.subheader("Document Rendering (PDF)")
+        st.selectbox("PDF DPI", options=[150, 300, 600], index=1,
+                     key="pdf_dpi_choice",
+                     help="Single-page PDF input. 300 DPI recommended.")
     
     # Main content
     tab1, tab2, tab3, tab4 = st.tabs(["🔍 Verification", "📊 Model Management", "📈 Analytics", "⚙️ Settings"])
@@ -264,12 +278,19 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
         # Process file
         with st.spinner("Processing document..."):
             try:
-                # Load file
-                images = load_file(uploaded_file)
-                if uploaded_file.type == "application/pdf":
-                    images = convert_pdf_to_images(uploaded_file)
-                else:
-                    images = [images]
+                # Load file with source type tracking
+                # PDF inputs: high-quality, already clean, skip CV preprocessing
+                # Image inputs: may need CV preprocessing for scanned/photographed pages
+                # Read rendering params from session state with safe defaults
+                _dpi = int(st.session_state.get("pdf_dpi_choice", 300))
+                _max_pages = 1
+                _first_n = 1
+                images, source_type = load_file(
+                    uploaded_file,
+                    dpi=_dpi,
+                    max_pages=_max_pages,
+                    first_n_pages=_first_n
+                )
                 
                 # Use cached database and OCR model from components
                 db = components['db']
@@ -287,19 +308,29 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
                         st.image(img, caption=f"Original Page {idx}", width='stretch')
                     
                     with col2:
-                        st.write("**Preprocessed Image:**")
-                        preprocessed_img = preprocess_image(img)
-                        st.image(preprocessed_img, caption=f"Preprocessed Page {idx}", width='stretch')
+                        # Only show preprocessing for scanned images (not PDFs)
+                        if source_type == "image":
+                            st.write("**Preprocessed Image:**")
+                            preprocessed_img = preprocess_image(img)
+                            st.image(preprocessed_img, caption=f"Preprocessed Page {idx}", width='stretch')
+                            # Use preprocessed image for OCR on scanned images
+                            ocr_input_img = preprocessed_img
+                        else:
+                            st.write("**PDF Source (No Preprocessing Needed):**")
+                            st.info("✓ PDF pages are already high quality and don't require preprocessing")
+                            # Use original image directly for PDFs
+                            ocr_input_img = img
                     
-                    # OCR extraction
+                    # OCR extraction with source type flag
                     with st.spinner("Extracting text..."):
-                        ocr_result = ocr_model.extract(preprocessed_img)
+                        ocr_result = ocr_model.extract(ocr_input_img, source_type=source_type)
                     
                     # Display OCR Results with improved UI (from original app.py)
                     st.write("### 📝 OCR Extraction Results")
                     
                     # Get OCR results
                     qari_text = ocr_result.get("qari_text", ocr_result.get("text", ""))
+                    method = ocr_result.get("method", "unknown")
                     
                     # Show QariOCR Fine-Tuned result
                     st.markdown(f"""
@@ -310,7 +341,7 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
                         </p>
                         <p style='color: #666; margin-bottom: 0;'>
                             <strong>Confidence:</strong> {ocr_result.get("confidences", [0])[0]:.1%} | 
-                            <strong>Processing:</strong> Qari OCR v0.1 (Fine-tuned with enhanced prompting)
+                            <strong>Processing:</strong> {method}
                         </p>
                     </div>
                     """, unsafe_allow_html=True)
@@ -358,6 +389,22 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
                     try:
                         verses = segment_verses(ocr_result_for_verification)
                         db_verses = db.get_verses(verses["surah"], verses["ayah_nums"])
+                        
+                        # Display detected surah information
+                        st.write("### 📖 Detected Surah Information")
+                        col_surah1, col_surah2, col_surah3 = st.columns(3)
+                        with col_surah1:
+                            st.metric("Surah Number", verses["surah"])
+                        with col_surah2:
+                            st.metric("Surah Title", verses.get("surah_title", "Unknown"))
+                        with col_surah3:
+                            st.metric("Detected Page", verses.get("page_num", "Unknown"))
+                        
+                        # Show confidence if available
+                        if verses.get("confidence"):
+                            confidence_emoji = "✅" if verses["confidence"] > 0.7 else "⚠️"
+                            st.caption(f"{confidence_emoji} Detection confidence: {verses['confidence']:.1%}")
+                        
                     except Exception as e:
                         st.error(f"Verse segmentation or DB lookup failed for page {idx}: {e}")
                         continue
@@ -399,14 +446,38 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
                                 
                                 st.write(f"🔍 **Debug Info:** Analyzing {len(reference_texts)} reference verses against extracted text")
                                 
+                                # Get actual surah from page_number if available
+                                actual_surah = verses.get('surah', 1) if isinstance(verses, dict) else 1
+                                if page_number:
+                                    page_info = components['db'].get_page_info(page_number)
+                                    if page_info:
+                                        actual_surah = page_info.get('sura_start', actual_surah)
+                                
+                                # Detect and display surah mismatch with detailed info
+                                detected_surah = verses.get('surah', 1) if isinstance(verses, dict) else 1
+                                
+                                if page_number and actual_surah and actual_surah != detected_surah:
+                                    st.error(f"""
+                                    ⚠️ **SURAH MISMATCH DETECTED**
+                                    
+                                    - **Expected:** Surah {actual_surah} (for page {page_number})
+                                    - **Detected:** Surah {detected_surah}
+                                    - **Impact:** Comparing against wrong verses may cause false positives
+                                    - **Solution:** Using page number to correct surah
+                                    """)
+                                
                                 missing_line_analysis = components['missing_line_detector'].detect_missing_lines(
                                     qari_text, 
                                     reference_texts,
-                                    verses.get('surah', 1) if isinstance(verses, dict) else 1,
-                                    page_number or 1
+                                    detected_surah,  # Use detected surah for RAG context
+                                    page_number or 1,
+                                    actual_surah=actual_surah  # Use actual surah for validation
                                 )
                                 
-                                st.write(f"🔍 **Analysis Result:** {len(missing_line_analysis.get('missing_indices', []))} missing lines found")
+                                # Show comprehensive results
+                                missing_count = len(missing_line_analysis.get('missing_indices', []))
+                                anomaly_count = len(missing_line_analysis.get('anomaly_indices', []))
+                                st.write(f"🔍 **Analysis Result:** {missing_count} missing lines, {anomaly_count} line anomalies detected")
                                 
                             except Exception as e:
                                 st.warning(f"⚠️ Missing line analysis failed: {e}")
@@ -510,16 +581,22 @@ def verification_tab(components: Dict, model_info: Dict, settings: Dict):
                     if missing_line_analysis:
                         st.write("### 🔍 Missing Line Analysis")
                         
+                        # Show surah mismatch if detected
+                        if missing_line_analysis.get('surah_mismatch'):
+                            st.warning("⚠️ Analysis may be comparing against wrong surah. Consider providing page number for accuracy.")
+                        
                         # Show analysis status with RAG + LLM info
                         rag_status = "🧠 RAG + LLM Enhanced" if any(s.get('rag_enhanced', False) for s in missing_line_analysis.get('suggestions', [])) else "📝 Basic Analysis"
                         st.info(f"ℹ️ **Missing Line Analysis** - {rag_status}")
                         
                         # Show missing line count
                         missing_count = len(missing_line_analysis.get('missing_indices', []))
-                        if missing_count > 0:
-                            st.warning(f"⚠️ **{missing_count} missing line(s) detected!**")
+                        anomaly_count = len(missing_line_analysis.get('anomaly_indices', []))
+                        
+                        if missing_count > 0 or anomaly_count > 0:
+                            st.warning(f"⚠️ **{missing_count} missing line(s), {anomaly_count} anomaly/anomalies detected!**")
                         else:
-                            st.success("✅ **No missing lines detected**")
+                            st.success("✅ **No missing lines or anomalies detected**")
                         
                         # Display missing lines
                         for suggestion in missing_line_analysis.get('suggestions', []):
@@ -957,6 +1034,29 @@ def settings_tab(components):
         semantic_threshold = st.slider("Semantic Similarity Threshold", 0.0, 100.0, 80.0)
         contextual_threshold = st.slider("Contextual Accuracy Threshold", 0.0, 100.0, 75.0)
     
+    # Model selection
+    st.subheader("Model Version")
+    try:
+        model_manager: ModelManager = components.get('model_manager') if isinstance(components, dict) else ModelManager()
+        available = model_manager.get_available_models()
+        names = [m.get('name', m.get('path')) for m in available]
+        versions = [m.get('version', '') for m in available]
+        display = [f"{n} (v{v})" if v else n for n, v in zip(names, versions)]
+        current = model_manager.get_current_model()
+        current_display = f"{current.get('name', current.get('path'))} (v{current.get('version', '')})"
+        selection = st.selectbox("Select OCR Model Adapter", options=display, index=(display.index(current_display) if current_display in display else 0))
+        if st.button("Switch Model"):
+            # Map selection back to version and set current
+            idx = display.index(selection)
+            sel_version = versions[idx]
+            ok = model_manager.set_current_model(sel_version)
+            if ok:
+                st.success("Model selection saved. Please rerun app or new inferences will use the selected adapter.")
+            else:
+                st.error("Failed to switch model. Make sure the adapter folder exists under models/.")
+    except Exception as e:
+        st.warning(f"Model selection unavailable: {e}")
+
     # System settings
     st.subheader("System Settings")
     

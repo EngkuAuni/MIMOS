@@ -2,6 +2,7 @@
 
 import os
 from PIL import Image
+import numpy as np
 
 class QariOCR:
     def __init__(self, model_path, fallback_warn=False):
@@ -9,9 +10,12 @@ class QariOCR:
         self.model = None
         self.processor = None
         self.device = "cpu"  # Default to CPU for Intel Mac
-        self.max_new_tokens = 2048  # Full page extraction (was 128 - too low!)
+        self.max_new_tokens = 256  # Further reduce to lower memory during generation
         self.last_error = None
-        
+        # CV preprocessing toggle (disabled by default)
+        self.enable_cv_preprocess = os.environ.get("QARIOCR_CV_PREPROCESS", "0") in ("1", "true", "True")
+        self.cv_debug = os.environ.get("QARIOCR_CV_DEBUG", "0") in ("1", "true", "True")
+
         # Try to load the full model with PyTorch + PEFT adapter on CPU (no bitsandbytes)
         try:
             # Ensure libraries import
@@ -74,7 +78,8 @@ class QariOCR:
                 base_model = Qwen2VLForConditionalGeneration.from_pretrained(
                     base_model_id,
                     device_map=None,
-                    torch_dtype=torch.float32
+                    torch_dtype=torch.float32,
+                    low_cpu_mem_usage=True
                 )
 
             # Attach PEFT adapter weights from the provided repo (model_path)
@@ -106,13 +111,14 @@ class QariOCR:
             self.processor = None
             self.last_error = str(e)
 
-    def extract(self, image, prompt=None):
+    def extract(self, image, prompt=None, source_type=None):
         """
         Extract text from Quran page image.
         
         Args:
             image: PIL Image or numpy array
             prompt: Custom prompt (None = use strict verification prompt)
+            source_type: "pdf" or "image" - PDF inputs skip CV preprocessing as they're already clean
         """
         # Enhanced strict verification prompt - tells model NOT to correct errors
         if prompt is None:
@@ -122,82 +128,140 @@ class QariOCR:
             return self._fallback_extract(image)
         
         try:
-            from qwen_vl_utils import process_vision_info
-            import numpy as np
+            # Skip CV preprocessing for PDF inputs (they're already clean, deskewed, high quality)
+            # CV preprocessing is for scanned/photographed images that need enhancement
+            should_use_cv = self.enable_cv_preprocess and source_type != "pdf"
             
-            # Save image temporarily
-            temp_path = "temp_image.png"
-            # Ensure image is PIL.Image and RGB format
-            if not isinstance(image, Image.Image):
-                # Convert numpy array to PIL
-                if isinstance(image, np.ndarray):
-                    # Convert to uint8 if needed
-                    if image.dtype != np.uint8:
-                        image = (image * 255).astype(np.uint8) if image.max() <= 1 else image.astype(np.uint8)
-                    image = Image.fromarray(image)
-                else:
-                    image = Image.fromarray(np.array(image))
-            
-            # Convert to RGB if not already
-            if image.mode != 'RGB':
-                image = image.convert('RGB')
-            
-            image.save(temp_path)
-            
-            # Prepare messages
-            messages = [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "image", "image": f"file://{os.path.abspath(temp_path)}"},
-                        {"type": "text", "text": prompt},
-                    ],
+            # Optional CV preprocessing + line segmentation
+            if should_use_cv:
+                try:
+                    from cv.preprocess import preprocess_page
+                    from cv.line_segmentation import segment_lines
+                    import cv2
+                except Exception:
+                    # If CV dependencies missing, fall back to whole image
+                    return self._generate_from_pil(image, prompt)
+
+                # Ensure numpy BGR
+                pil_img = image if isinstance(image, Image.Image) else Image.fromarray(np.asarray(image))
+                if pil_img.mode != 'RGB':
+                    pil_img = pil_img.convert('RGB')
+                rgb = np.array(pil_img)
+                bgr = rgb[:, :, ::-1]
+
+                pre = preprocess_page(bgr, debug=self.cv_debug)
+                # Segment lines on binarized (if available) else grayscale conversion
+                bin_img = pre.binarized_image
+                if bin_img is None:
+                    gray = cv2.cvtColor(pre.processed_image, cv2.COLOR_BGR2GRAY)
+                    _, bin_img = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                regions = segment_lines(bin_img, pre.processed_image)
+
+                # If segmentation failed, fall back to whole image
+                if not regions or len(regions) < 2:
+                    return self._generate_from_pil(pil_img, prompt)
+
+                # Generate per line and merge with newlines
+                outputs: list[str] = []
+                for reg in regions:
+                    line_rgb = reg.image[:, :, ::-1]
+                    line_pil = Image.fromarray(line_rgb)
+                    out = self._generate_from_pil(line_pil, prompt)
+                    text = out.get("qari_text") or out.get("text") or ""
+                    outputs.append(text.strip())
+                merged = "\n".join([t for t in outputs if t])
+                return {
+                    "text": merged,
+                    "confidences": [0.9],
+                    "qari_text": merged,
+                    "method": "qari_ocr_fine_tuned_lines"
                 }
-            ]
-            
-            # Process the input
-            text = self.processor.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
-            image_inputs, video_inputs = process_vision_info(messages)
-            inputs = self.processor(
-                text=[text],
-                images=image_inputs,
-                videos=video_inputs,
-                padding=True,
-                return_tensors="pt",
-            )
-            inputs = inputs.to(self.device)
-            
-            # Generate text
-            print("[QariOCR] Generating on CPU... (this may take ~30-90s)")
-            generated_ids = self.model.generate(
-                **inputs,
-                max_new_tokens=self.max_new_tokens,
-                do_sample=False,
-                temperature=0.0
-            )
-            generated_ids_trimmed = [
-                out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
-            ]
-            output_text = self.processor.batch_decode(
-                generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
-            )[0]
-            
-            # Clean up temp file
-            if os.path.exists(temp_path):
-                os.remove(temp_path)
-            
-            return {
-                "text": output_text, 
-                "confidences": [0.9],
-                "qari_text": output_text,
-                "method": "qari_ocr_fine_tuned"
-            }
+            else:
+                # Whole image
+                return self._generate_from_pil(image, prompt)
             
         except Exception as e:
             print(f"Error in Qari OCR extraction: {e}")
             return self._fallback_extract(image)
+
+    def _generate_from_pil(self, image, prompt: str):
+        from qwen_vl_utils import process_vision_info
+        import tempfile
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        temp_path = temp_file.name
+        # Ensure image is PIL.Image and RGB format
+        if not isinstance(image, Image.Image):
+            # Convert numpy array to PIL
+            if isinstance(image, np.ndarray):
+                if image.dtype != np.uint8:
+                    image = (image * 255).astype(np.uint8) if image.max() <= 1 else image.astype(np.uint8)
+                image = Image.fromarray(image)
+            else:
+                image = Image.fromarray(np.array(image))
+
+        if image.mode != 'RGB':
+            image = image.convert('RGB')
+
+        image.save(temp_path)
+
+        # Prepare messages
+        messages = [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "image", "image": f"file://{os.path.abspath(temp_path)}"},
+                    {"type": "text", "text": prompt},
+                ],
+            }
+        ]
+
+        # Process the input
+        text = self.processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        image_inputs, video_inputs = process_vision_info(messages)
+        inputs = self.processor(
+            text=[text],
+            images=image_inputs,
+            videos=video_inputs,
+            padding=True,
+            return_tensors="pt",
+        )
+        inputs = inputs.to(self.device)
+
+        # Generate text
+        print("[QariOCR] Generating on CPU... (this may take ~30-90s)")
+        generate_kwargs = {
+            "max_new_tokens": self.max_new_tokens,
+            "do_sample": False,
+            "temperature": 0.0,
+            # Reduce repetitions and loops
+            "repetition_penalty": 1.05,
+            "no_repeat_ngram_size": 6,
+        }
+        generated_ids = self.model.generate(
+            **inputs,
+            **generate_kwargs,
+        )
+        generated_ids_trimmed = [
+            out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+        ]
+        output_text = self.processor.batch_decode(
+            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )[0]
+
+        if os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except Exception:
+                pass
+
+        return {
+            "text": output_text,
+            "confidences": [0.9],
+            "qari_text": output_text,
+            "method": "qari_ocr_fine_tuned"
+        }
     
     def _fallback_extract(self, image):
         """Fallback OCR method when the main model fails"""

@@ -1,0 +1,2786 @@
+[
+  {
+    "id": "error_v2_diacritic_084_6176",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_084_6176.jpg",
+    "original_page": 84,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_282_2540",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_282_2540.jpg",
+    "original_page": 282,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_448_5811",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_448_5811.jpg",
+    "original_page": 448,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_340_1",
+    "image_path": "augmented_perfect/page_340_aug_1.jpg",
+    "original_page": 340,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_word_level_316_9375",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_316_9375.jpg",
+    "original_page": 316,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_character_494_4524",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_494_4524.jpg",
+    "original_page": 494,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_437_8602",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_437_8602.jpg",
+    "original_page": 437,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_439_3991",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_439_3991.jpg",
+    "original_page": 439,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_600_1837",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_600_1837.jpg",
+    "original_page": 600,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_596_1",
+    "image_path": "augmented_perfect/page_596_aug_1.jpg",
+    "original_page": 596,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_455_2",
+    "image_path": "augmented_perfect/page_455_aug_2.jpg",
+    "original_page": 455,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_289_2",
+    "image_path": "augmented_perfect/page_289_aug_2.jpg",
+    "original_page": 289,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_600_1",
+    "image_path": "augmented_perfect/page_600_aug_1.jpg",
+    "original_page": 600,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_122_1",
+    "image_path": "augmented_perfect/page_122_aug_1.jpg",
+    "original_page": 122,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_176_2",
+    "image_path": "augmented_perfect/page_176_aug_2.jpg",
+    "original_page": 176,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_026_2097",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_026_2097.jpg",
+    "original_page": 26,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_257_2",
+    "image_path": "augmented_perfect/page_257_aug_2.jpg",
+    "original_page": 257,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_371_2",
+    "image_path": "augmented_perfect/page_371_aug_2.jpg",
+    "original_page": 371,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_222_1",
+    "image_path": "augmented_perfect/page_222_aug_1.jpg",
+    "original_page": 222,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_168_7684",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_168_7684.jpg",
+    "original_page": 168,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_593_7638",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_593_7638.jpg",
+    "original_page": 593,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_237_2",
+    "image_path": "augmented_perfect/page_237_aug_2.jpg",
+    "original_page": 237,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_249_9751",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_249_9751.jpg",
+    "original_page": 249,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_400_6780",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_400_6780.jpg",
+    "original_page": 400,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_494_6423",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_494_6423.jpg",
+    "original_page": 494,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_452_1",
+    "image_path": "augmented_perfect/page_452_aug_1.jpg",
+    "original_page": 452,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_073_1",
+    "image_path": "augmented_perfect/page_073_aug_1.jpg",
+    "original_page": 73,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_word_level_034_9319",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_034_9319.jpg",
+    "original_page": 34,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_word_level_259_7433",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_259_7433.jpg",
+    "original_page": 259,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_034_1",
+    "image_path": "augmented_perfect/page_034_aug_1.jpg",
+    "original_page": 34,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_133_1",
+    "image_path": "augmented_perfect/page_133_aug_1.jpg",
+    "original_page": 133,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_256_8752",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_256_8752.jpg",
+    "original_page": 256,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_206_3232",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_206_3232.jpg",
+    "original_page": 206,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_175_1208",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_175_1208.jpg",
+    "original_page": 175,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_578_2",
+    "image_path": "augmented_perfect/page_578_aug_2.jpg",
+    "original_page": 578,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_544_2",
+    "image_path": "augmented_perfect/page_544_aug_2.jpg",
+    "original_page": 544,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_354_1693",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_354_1693.jpg",
+    "original_page": 354,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_380_1",
+    "image_path": "augmented_perfect/page_380_aug_1.jpg",
+    "original_page": 380,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_042_2082",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_042_2082.jpg",
+    "original_page": 42,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sُample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_318_1056",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_318_1056.jpg",
+    "original_page": 318,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_344_1",
+    "image_path": "augmented_perfect/page_344_aug_1.jpg",
+    "original_page": 344,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_441_2",
+    "image_path": "augmented_perfect/page_441_aug_2.jpg",
+    "original_page": 441,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_301_6557",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_301_6557.jpg",
+    "original_page": 301,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_575_8963",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_575_8963.jpg",
+    "original_page": 575,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_423_3934",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_423_3934.jpg",
+    "original_page": 423,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for eَrror generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_278_2",
+    "image_path": "augmented_perfect/page_278_aug_2.jpg",
+    "original_page": 278,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_160_1",
+    "image_path": "augmented_perfect/page_160_aug_1.jpg",
+    "original_page": 160,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_word_level_179_5768",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_179_5768.jpg",
+    "original_page": 179,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_567_1832",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_567_1832.jpg",
+    "original_page": 567,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sْample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_331_6176",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_331_6176.jpg",
+    "original_page": 331,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_134_2",
+    "image_path": "augmented_perfect/page_134_aug_2.jpg",
+    "original_page": 134,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_379_7220",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_379_7220.jpg",
+    "original_page": 379,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Samْple text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_506_2",
+    "image_path": "augmented_perfect/page_506_aug_2.jpg",
+    "original_page": 506,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_108_6167",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_108_6167.jpg",
+    "original_page": 108,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_184_7153",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_184_7153.jpg",
+    "original_page": 184,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for errِor generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_572_2",
+    "image_path": "augmented_perfect/page_572_aug_2.jpg",
+    "original_page": 572,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_308_6514",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_308_6514.jpg",
+    "original_page": 308,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_158_2",
+    "image_path": "augmented_perfect/page_158_aug_2.jpg",
+    "original_page": 158,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_431_1",
+    "image_path": "augmented_perfect/page_431_aug_1.jpg",
+    "original_page": 431,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_528_8140",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_528_8140.jpg",
+    "original_page": 528,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text forِ error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_371_8132",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_371_8132.jpg",
+    "original_page": 371,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_028_1",
+    "image_path": "augmented_perfect/page_028_aug_1.jpg",
+    "original_page": 28,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_145_1",
+    "image_path": "augmented_perfect/page_145_aug_1.jpg",
+    "original_page": 145,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_569_4088",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_569_4088.jpg",
+    "original_page": 569,
+    "error_category": "character",
+    "error_type": "missing",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_377_2",
+    "image_path": "augmented_perfect/page_377_aug_2.jpg",
+    "original_page": 377,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_590_2",
+    "image_path": "augmented_perfect/page_590_aug_2.jpg",
+    "original_page": 590,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_word_level_509_5303",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_509_5303.jpg",
+    "original_page": 509,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_193_4591",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_193_4591.jpg",
+    "original_page": 193,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_117_1",
+    "image_path": "augmented_perfect/page_117_aug_1.jpg",
+    "original_page": 117,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_429_8590",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_429_8590.jpg",
+    "original_page": 429,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_158_1",
+    "image_path": "augmented_perfect/page_158_aug_1.jpg",
+    "original_page": 158,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_234_6959",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_234_6959.jpg",
+    "original_page": 234,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_602_1",
+    "image_path": "augmented_perfect/page_602_aug_1.jpg",
+    "original_page": 602,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_562_1516",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_562_1516.jpg",
+    "original_page": 562,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for errorِ generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_163_2",
+    "image_path": "augmented_perfect/page_163_aug_2.jpg",
+    "original_page": 163,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_168_6570",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_168_6570.jpg",
+    "original_page": 168,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_416_7756",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_416_7756.jpg",
+    "original_page": 416,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_180_1",
+    "image_path": "augmented_perfect/page_180_aug_1.jpg",
+    "original_page": 180,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_418_2",
+    "image_path": "augmented_perfect/page_418_aug_2.jpg",
+    "original_page": 418,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_326_2880",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_326_2880.jpg",
+    "original_page": 326,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error gِeneration",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_314_7147",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_314_7147.jpg",
+    "original_page": 314,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_486_1775",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_486_1775.jpg",
+    "original_page": 486,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_470_2",
+    "image_path": "augmented_perfect/page_470_aug_2.jpg",
+    "original_page": 470,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_022_7425",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_022_7425.jpg",
+    "original_page": 22,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_051_2",
+    "image_path": "augmented_perfect/page_051_aug_2.jpg",
+    "original_page": 51,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_386_2",
+    "image_path": "augmented_perfect/page_386_aug_2.jpg",
+    "original_page": 386,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_420_2599",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_420_2599.jpg",
+    "original_page": 420,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_219_1",
+    "image_path": "augmented_perfect/page_219_aug_1.jpg",
+    "original_page": 219,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_283_2",
+    "image_path": "augmented_perfect/page_283_aug_2.jpg",
+    "original_page": 283,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_156_3694",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_156_3694.jpg",
+    "original_page": 156,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error َgeneration",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_242_5804",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_242_5804.jpg",
+    "original_page": 242,
+    "error_category": "character",
+    "error_type": "missing",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_185_1086",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_185_1086.jpg",
+    "original_page": 185,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_085_1",
+    "image_path": "augmented_perfect/page_085_aug_1.jpg",
+    "original_page": 85,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_097_1",
+    "image_path": "augmented_perfect/page_097_aug_1.jpg",
+    "original_page": 97,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_595_2",
+    "image_path": "augmented_perfect/page_595_aug_2.jpg",
+    "original_page": 595,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_037_1035",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_037_1035.jpg",
+    "original_page": 37,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_246_5262",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_246_5262.jpg",
+    "original_page": 246,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for errّor generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_043_6984",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_043_6984.jpg",
+    "original_page": 43,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_513_9792",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_513_9792.jpg",
+    "original_page": 513,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_307_2",
+    "image_path": "augmented_perfect/page_307_aug_2.jpg",
+    "original_page": 307,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_146_9583",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_146_9583.jpg",
+    "original_page": 146,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_062_2272",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_062_2272.jpg",
+    "original_page": 62,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_408_7194",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_408_7194.jpg",
+    "original_page": 408,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_218_4871",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_218_4871.jpg",
+    "original_page": 218,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_381_3246",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_381_3246.jpg",
+    "original_page": 381,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_316_4831",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_316_4831.jpg",
+    "original_page": 316,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generُation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_144_7767",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_144_7767.jpg",
+    "original_page": 144,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_subtle_440_5500",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_440_5500.jpg",
+    "original_page": 440,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_003_1",
+    "image_path": "augmented_perfect/page_003_aug_1.jpg",
+    "original_page": 3,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_326_1",
+    "image_path": "augmented_perfect/page_326_aug_1.jpg",
+    "original_page": 326,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_453_4349",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_453_4349.jpg",
+    "original_page": 453,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_230_9679",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_230_9679.jpg",
+    "original_page": 230,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_055_3479",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_055_3479.jpg",
+    "original_page": 55,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_101_6563",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_101_6563.jpg",
+    "original_page": 101,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_076_4620",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_076_4620.jpg",
+    "original_page": 76,
+    "error_category": "character",
+    "error_type": "missing",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_426_1",
+    "image_path": "augmented_perfect/page_426_aug_1.jpg",
+    "original_page": 426,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_456_2",
+    "image_path": "augmented_perfect/page_456_aug_2.jpg",
+    "original_page": 456,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_266_9835",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_266_9835.jpg",
+    "original_page": 266,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text foْr error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_595_6955",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_595_6955.jpg",
+    "original_page": 595,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_473_8729",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_473_8729.jpg",
+    "original_page": 473,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generْation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_167_2",
+    "image_path": "augmented_perfect/page_167_aug_2.jpg",
+    "original_page": 167,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_408_1230",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_408_1230.jpg",
+    "original_page": 408,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_066_3814",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_066_3814.jpg",
+    "original_page": 66,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_221_6486",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_221_6486.jpg",
+    "original_page": 221,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_577_1",
+    "image_path": "augmented_perfect/page_577_aug_1.jpg",
+    "original_page": 577,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_310_6097",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_310_6097.jpg",
+    "original_page": 310,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_356_2",
+    "image_path": "augmented_perfect/page_356_aug_2.jpg",
+    "original_page": 356,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_069_1",
+    "image_path": "augmented_perfect/page_069_aug_1.jpg",
+    "original_page": 69,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_579_3280",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_579_3280.jpg",
+    "original_page": 579,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_582_3691",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_582_3691.jpg",
+    "original_page": 582,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_279_3109",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_279_3109.jpg",
+    "original_page": 279,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Saْmple text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_180_4145",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_180_4145.jpg",
+    "original_page": 180,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_580_3323",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_580_3323.jpg",
+    "original_page": 580,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_word_level_267_6654",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_267_6654.jpg",
+    "original_page": 267,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_360_8017",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_360_8017.jpg",
+    "original_page": 360,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_326_2",
+    "image_path": "augmented_perfect/page_326_aug_2.jpg",
+    "original_page": 326,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_494_6581",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_494_6581.jpg",
+    "original_page": 494,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_134_7227",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_134_7227.jpg",
+    "original_page": 134,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_269_4370",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_269_4370.jpg",
+    "original_page": 269,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_579_2",
+    "image_path": "augmented_perfect/page_579_aug_2.jpg",
+    "original_page": 579,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_249_2",
+    "image_path": "augmented_perfect/page_249_aug_2.jpg",
+    "original_page": 249,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_506_4533",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_506_4533.jpg",
+    "original_page": 506,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_subtle_450_4913",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_450_4913.jpg",
+    "original_page": 450,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_039_9350",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_039_9350.jpg",
+    "original_page": 39,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_013_8363",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_013_8363.jpg",
+    "original_page": 13,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_029_2",
+    "image_path": "augmented_perfect/page_029_aug_2.jpg",
+    "original_page": 29,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_082_7602",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_082_7602.jpg",
+    "original_page": 82,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_542_5285",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_542_5285.jpg",
+    "original_page": 542,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_275_1",
+    "image_path": "augmented_perfect/page_275_aug_1.jpg",
+    "original_page": 275,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_060_2",
+    "image_path": "augmented_perfect/page_060_aug_2.jpg",
+    "original_page": 60,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_362_1",
+    "image_path": "augmented_perfect/page_362_aug_1.jpg",
+    "original_page": 362,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_470_5137",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_470_5137.jpg",
+    "original_page": 470,
+    "error_category": "character",
+    "error_type": "missing",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_word_level_572_4475",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_572_4475.jpg",
+    "original_page": 572,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_329_1",
+    "image_path": "augmented_perfect/page_329_aug_1.jpg",
+    "original_page": 329,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_046_6662",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_046_6662.jpg",
+    "original_page": 46,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_199_4473",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_199_4473.jpg",
+    "original_page": 199,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_047_2",
+    "image_path": "augmented_perfect/page_047_aug_2.jpg",
+    "original_page": 47,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_583_5674",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_583_5674.jpg",
+    "original_page": 583,
+    "error_category": "diacritic",
+    "error_type": "extra_diacritic",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": "Extra diacritic added"
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sampِle text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_485_9458",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_485_9458.jpg",
+    "original_page": 485,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_diacritic_334_4504",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_334_4504.jpg",
+    "original_page": 334,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_375_1",
+    "image_path": "augmented_perfect/page_375_aug_1.jpg",
+    "original_page": 375,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_343_8326",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_343_8326.jpg",
+    "original_page": 343,
+    "error_category": "character",
+    "error_type": "missing",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_character_561_4573",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_561_4573.jpg",
+    "original_page": 561,
+    "error_category": "character",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_481_6553",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_481_6553.jpg",
+    "original_page": 481,
+    "error_category": "diacritic",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_236_2862",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_236_2862.jpg",
+    "original_page": 236,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_413_2",
+    "image_path": "augmented_perfect/page_413_aug_2.jpg",
+    "original_page": 413,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_465_6285",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_465_6285.jpg",
+    "original_page": 465,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_297_1",
+    "image_path": "augmented_perfect/page_297_aug_1.jpg",
+    "original_page": 297,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_449_2",
+    "image_path": "augmented_perfect/page_449_aug_2.jpg",
+    "original_page": 449,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_character_303_5101",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_303_5101.jpg",
+    "original_page": 303,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_076_8781",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_076_8781.jpg",
+    "original_page": 76,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_129_5962",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_129_5962.jpg",
+    "original_page": 129,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_512_1",
+    "image_path": "augmented_perfect/page_512_aug_1.jpg",
+    "original_page": 512,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_241_2",
+    "image_path": "augmented_perfect/page_241_aug_2.jpg",
+    "original_page": 241,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_224_2554",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_224_2554.jpg",
+    "original_page": 224,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_051_1",
+    "image_path": "augmented_perfect/page_051_aug_1.jpg",
+    "original_page": 51,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_091_2",
+    "image_path": "augmented_perfect/page_091_aug_2.jpg",
+    "original_page": 91,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_448_3960",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_448_3960.jpg",
+    "original_page": 448,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_569_2",
+    "image_path": "augmented_perfect/page_569_aug_2.jpg",
+    "original_page": 569,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_319_3185",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_319_3185.jpg",
+    "original_page": 319,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_subtle_582_4865",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_582_4865.jpg",
+    "original_page": 582,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_535_7319",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_535_7319.jpg",
+    "original_page": 535,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_547_9683",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_547_9683.jpg",
+    "original_page": 547,
+    "error_category": "character",
+    "error_type": "hamza_variant",
+    "error_info": {
+      "type": "character_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_332_5883",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_332_5883.jpg",
+    "original_page": 332,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_word_level_133_8315",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_133_8315.jpg",
+    "original_page": 133,
+    "error_category": "word_level",
+    "error_type": "missing_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_subtle_234_9242",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_234_9242.jpg",
+    "original_page": 234,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_542_3634",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_542_3634.jpg",
+    "original_page": 542,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_word_level_297_3482",
+    "image_path": "synthetic_errors_v2_full/error_v2_word_level_297_3482.jpg",
+    "original_page": 297,
+    "error_category": "word_level",
+    "error_type": "repeated_word",
+    "error_info": {
+      "type": "word_level_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "error_v2_subtle_007_5529",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_007_5529.jpg",
+    "original_page": 7,
+    "error_category": "subtle",
+    "error_type": "substitution",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_373_2",
+    "image_path": "augmented_perfect/page_373_aug_2.jpg",
+    "original_page": 373,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "perfect_aug_271_1",
+    "image_path": "augmented_perfect/page_271_aug_1.jpg",
+    "original_page": 271,
+    "augmentation_level": "light",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_080_3435",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_080_3435.jpg",
+    "original_page": 80,
+    "error_category": "subtle",
+    "error_type": "missing_shadda",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_548_9416",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_548_9416.jpg",
+    "original_page": 548,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_character_258_4490",
+    "image_path": "synthetic_errors_v2_full/error_v2_character_258_4490.jpg",
+    "original_page": 258,
+    "error_category": "character",
+    "error_type": "extra",
+    "error_info": {
+      "type": "character_error",
+      "severity": "CRITICAL",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "CRITICAL"
+  },
+  {
+    "id": "perfect_aug_445_2",
+    "image_path": "augmented_perfect/page_445_aug_2.jpg",
+    "original_page": 445,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_subtle_599_7759",
+    "image_path": "synthetic_errors_v2_full/error_v2_subtle_599_7759.jpg",
+    "original_page": 599,
+    "error_category": "subtle",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text",
+    "error_text": "Sample text",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "error_v2_diacritic_108_7575",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_108_7575.jpg",
+    "original_page": 108,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_139_2",
+    "image_path": "augmented_perfect/page_139_aug_2.jpg",
+    "original_page": 139,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  },
+  {
+    "id": "error_v2_diacritic_534_1416",
+    "image_path": "synthetic_errors_v2_full/error_v2_diacritic_534_1416.jpg",
+    "original_page": 534,
+    "error_category": "diacritic",
+    "error_type": "fatha_to_kasra",
+    "error_info": {
+      "type": "diacritic_error",
+      "severity": "MAJOR",
+      "description": ""
+    },
+    "ground_truth_text": "Sample text for error generation",
+    "error_text": "Sample text for error generation",
+    "has_error": true,
+    "task": "error_detection",
+    "severity": "MAJOR"
+  },
+  {
+    "id": "perfect_aug_236_2",
+    "image_path": "augmented_perfect/page_236_aug_2.jpg",
+    "original_page": 236,
+    "augmentation_level": "medium",
+    "is_augmented": true,
+    "has_error": false,
+    "task": "text_extraction"
+  }
+]
