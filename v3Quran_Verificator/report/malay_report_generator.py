@@ -14,7 +14,15 @@ from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from KDN_COMPLIANCE_CONFIG import MALAY_REPORT_TEMPLATES, KDN_ERROR_CATEGORIES
+import os
+import sys
+
+# Ensure project root is on sys.path for consistent package resolution
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
+from kdn_config.KDN_COMPLIANCE_CONFIG import MALAY_REPORT_TEMPLATES, KDN_ERROR_CATEGORIES
 
 class MalayReportGenerator:
     """Generate KDN-compliant reports in Malay language"""

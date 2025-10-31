@@ -1,0 +1,17 @@
+{
+  "dataset_name": "FT2 Extraction Dataset",
+  "version": "2.0",
+  "model_type": "extraction",
+  "total_samples": 1333,
+  "train_samples": 1133,
+  "val_samples": 200,
+  "split_ratio": 0.85,
+  "perfect_ratio": 0.39984996249062266,
+  "error_ratio": 0.6001500375093773,
+  "prompt_strategy": "Extract the Quranic text from this image EXACTLY as printed.\nDO NOT auto-correct any errors.\nDO NOT fill in missing characters.\nDO NOT match to memorized text.\nReport exactly what you see, character by character.\nIf a character is unclear or missing, use underscore (_).\nPreserve all spacing and line breaks as shown.",
+  "data_sources": {
+    "ft1_data": 0,
+    "augmented_perfect": 1208,
+    "synthetic_errors": 800
+  }
+}

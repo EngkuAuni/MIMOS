@@ -78,3 +78,10 @@ QuranVerf/
 # Server specific
 Server/.env
 
+# Reports (generated at runtime)
+report/*.pdf
+report/*.json
+
+# Keep one small sample PDF per finetune version
+!QariOCR_Finetuning/FT*/FT*_sample_report.pdf
+
