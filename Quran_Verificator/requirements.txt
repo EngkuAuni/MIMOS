@@ -1,0 +1,39 @@
+# Database op
+sqlalchemy
+pandas
+
+# UI and Web Interface
+streamlit           # Interactive frontend for the app
+
+# PDF & Image Handling
+pdf2image           # Convert PDF pages to images
+pillow              # Image loading, resizing, format conversion
+
+# Computer Vision
+opencv-python       # Image preprocessing, ORB feature matching + SIFT 
+
+# OCR (Fallback)
+kraken              # optimized for Uthmani script
+torch               # Compatible with kraken, works with Python 3.8–3.10
+#Use python 3.10 for kraken compatibility (ensure venv is set up with python 3.10)
+
+# Text Similarity
+#difflib             # Built-in, basic fuzzy matching (current fallback)
+#rapidfuzz           # Fast Levenshtein -for upgrade
+
+# Core Numerical Operations
+numpy               # Used across feature matching, descriptor handling, image arrays
+
+# PDF Export
+weasyprint          # (Optional) HTML → PDF export for verification reports
+arabic-reshaper     # Reshapes Arabic for correct display (PDFs/UI)
+python-bidi         # Fixes RTL text direction for reshaped Arabic
+
+# HTML Parsing / Cleaning
+beautifulsoup4      # Clean up HTML output (e.g., diffs, UI rendering)
+
+# LLM 
+ollama
+
+# (Optional/To Add Later)
+# llama-cpp-python      # For running small LLMs locally (e.g., Phi-3, Mistral)

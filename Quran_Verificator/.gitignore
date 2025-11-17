@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# PDF/Reports
+*.pdf
+..bfg-report/
+
+# Streamlit
+.streamlit/
+
+# Logs & temp
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Environment and secrets
+.env
+
+# Docker backup scripts
+save_image.sh
+load_image.sh
+docker_img_backup
+*.tar
+
+# Python virtual environments
+QuranVerf/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Local database and generated assets
+*.db
+*.sql
+Data/quran.db
+Data/assets/orb_sift/
+Data/assets/images/
+Data/assets/orb/
+
+# Reference images
+Data/reference_imgs/
+
+# Keep canonical SQL dump
+!Data/Tanzil_quran-uthmani.sql  
+
+# Model files
+models/ocr/*.mlmodel

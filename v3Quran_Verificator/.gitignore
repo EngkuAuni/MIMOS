@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+
+# Models and large files
+models/FT1_QariOCR/*
+!models/FT1_QariOCR/config.json
+!models/FT1_QariOCR/tokenizer_config.json
+!models/FT1_QariOCR/special_tokens_map.json
+!models/FT1_QariOCR/vocab.json
+!models/FT1_QariOCR/merges.txt
+
+# Database
+database/quran_verses.db-journal
+*.db-journal
+
+# Reference images (too large)
+database/reference_imgs/
+
+# Logs
+*.log
+logs/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS
+Thumbs.db
+
+# Python virtual environments
+QuranVerf/
+
+# Server specific
+Server/.env
+
+# Reports (generated at runtime)
+report/*.pdf
+report/*.json
+
+# Keep one small sample PDF per finetune version
+!QariOCR_Finetuning/FT*/FT*_sample_report.pdf
+

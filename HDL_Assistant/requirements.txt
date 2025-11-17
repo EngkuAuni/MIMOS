@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+plotly
+scikit-learn
+matplotlib
+watchdog
+groq
+python-dotenv       # Loads environment variables from .env files
+# Icarus Verilog : brew install iverilog / iverilog -v

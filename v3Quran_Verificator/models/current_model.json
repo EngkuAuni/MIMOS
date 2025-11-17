@@ -1,0 +1,11 @@
+{
+  "name": "FT1_QariOCR",
+  "version": "1.0",
+  "type": "finetuned",
+  "path": "models/FT1_QariOCR",
+  "status": "available",
+  "accuracy": {
+    "wer": 0.045,
+    "cer": 0.012
+  }
+}
