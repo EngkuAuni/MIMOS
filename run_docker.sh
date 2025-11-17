@@ -7,7 +7,7 @@ mkdir -p uploads
 
 # Build the Docker image
 echo "📦 Building Docker image..."
-docker build -t quran-verifier .
+docker build -t quran-verifier -f docker/Dockerfile .
 
 # Check if build was successful
 if [ $? -eq 0 ]; then
@@ -15,15 +15,15 @@ if [ $? -eq 0 ]; then
     
     # Run the container
     echo "🏃 Starting container..."
-    docker-compose up -d
+    docker-compose -f docker/docker-compose.yml up -d
     
     # Check if container is running
     if [ $? -eq 0 ]; then
         echo "✅ Container started successfully!"
         echo ""
         echo "🌐 Application is running at: http://localhost:8501"
-        echo "📊 To view logs: docker-compose logs -f"
-        echo "🛑 To stop: docker-compose down"
+        echo "📊 To view logs: docker-compose -f docker/docker-compose.yml logs -f"
+        echo "🛑 To stop: docker-compose -f docker/docker-compose.yml down"
         echo ""
         echo "📁 Upload your Quran page images to the 'uploads' folder or use the web interface"
     else

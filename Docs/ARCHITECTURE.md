@@ -35,5 +35,5 @@ The system verifies Quran pages via three independent methods and surfaces resul
 
 ## Environments
 
-- Docker (recommended): `Dockerfile`, `docker-compose.yml`, `README_Docker.md`
-- Local dev: `SETUP.md`
+- Docker (recommended): `docker/Dockerfile`, `docker/docker-compose.yml`, `docker/README.md`
+- Local dev: See root `README.md` Quick Start section

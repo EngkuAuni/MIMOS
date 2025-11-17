@@ -205,7 +205,7 @@ function clean_volumes() {
     fi
     
     echo "🗑️  Removing volumes..."
-    docker-compose down -v
+    docker-compose -f docker/docker-compose.yml down -v
     
     echo "✅ All volumes removed"
 }

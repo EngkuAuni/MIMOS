@@ -9,11 +9,11 @@
 
 ### Option 2: Manual Docker commands
 ```bash
-# Build the image
-docker build -t quran-verifier .
+# Build the image (from project root)
+docker build -t quran-verifier -f docker/Dockerfile .
 
 # Run the container
-docker-compose up -d
+docker-compose -f docker/docker-compose.yml up -d
 ```
 
 ## Application Access
@@ -51,47 +51,47 @@ Your Docker setup includes **persistent data storage** using Docker named volume
 
 ### Volume Manager Tool
 
-Use the included **Volume Manager** tool: `docker_volume_manager.sh`
+Use the included **Volume Manager** tool: `docker/volume_manager.sh` (or `docker/docker_volume_manager.sh`)
 
 #### Common Operations
 
 ```bash
 # List all volumes and their sizes
-./docker_volume_manager.sh list
+./docker/docker_volume_manager.sh list
 
 # Backup all data
-./docker_volume_manager.sh backup
+./docker/docker_volume_manager.sh backup
 
 # Export a volume to local directory
-./docker_volume_manager.sh export models
+./docker/docker_volume_manager.sh export models
 
 # Import from local directory
-./docker_volume_manager.sh import database
+./docker/docker_volume_manager.sh import database
 
 # Browse volume contents
-./docker_volume_manager.sh browse uploads
+./docker/docker_volume_manager.sh browse uploads
 
 # Restore from backup
-./docker_volume_manager.sh restore
+./docker/docker_volume_manager.sh restore
 ```
 
 ## Management Commands
 
 ```bash
 # View logs
-docker-compose logs -f
+docker-compose -f docker/docker-compose.yml logs -f
 
 # Stop the application
-docker-compose down
+docker-compose -f docker/docker-compose.yml down
 
 # Restart the application
-docker-compose restart
+docker-compose -f docker/docker-compose.yml restart
 
 # Rebuild after code changes
-docker-compose up --build -d
+docker-compose -f docker/docker-compose.yml up --build -d
 
 # Access container shell
-docker-compose exec quran-verifier bash
+docker-compose -f docker/docker-compose.yml exec quran-verifier bash
 ```
 
 ## Performance
@@ -106,23 +106,23 @@ docker-compose exec quran-verifier bash
 ### Container won't start
 ```bash
 # Check logs
-docker-compose logs
+docker-compose -f docker/docker-compose.yml logs
 
 # Rebuild from scratch
-docker-compose down
+docker-compose -f docker/docker-compose.yml down
 docker rmi quran-verifier
-docker-compose up --build -d
+docker-compose -f docker/docker-compose.yml up --build -d
 ```
 
 ### OCR not working
 ```bash
 # Check if models are loaded
-docker-compose exec quran-verifier python -c "from models.qari_ocr import QariOCR; print('OCR loaded successfully')"
+docker-compose -f docker/docker-compose.yml exec quran-verifier python -c "from models.qari_ocr import QariOCR; print('OCR loaded successfully')"
 ```
 
 ### Port already in use
 ```bash
-# Change port in docker-compose.yml
+# Change port in docker/docker-compose.yml
 ports:
   - "8502:8501"  # Use port 8502 instead
 ```
@@ -132,8 +132,8 @@ ports:
 # Verify volumes are mounted
 docker inspect v3quran_verificator-quran-verifier-1 | grep -A 10 "Mounts"
 
-# Check docker-compose.yml has volume definitions
-cat docker-compose.yml | grep -A 5 "volumes:"
+# Check docker/docker-compose.yml has volume definitions
+cat docker/docker-compose.yml | grep -A 5 "volumes:"
 ```
 
 ### Out of Disk Space
@@ -163,16 +163,16 @@ docker system prune -a
 
 #### Stop the Container
 ```bash
-docker-compose down
+docker-compose -f docker/docker-compose.yml down
 ```
 - ✅ All data is preserved in volumes
 - ✅ Container removed but volumes remain
-- ✅ Next `docker-compose up` uses same data
+- ✅ Next `docker-compose -f docker/docker-compose.yml up` uses same data
 
 #### Rebuild the Image
 ```bash
-docker-compose build
-docker-compose up -d
+docker-compose -f docker/docker-compose.yml build
+docker-compose -f docker/docker-compose.yml up -d
 ```
 - ✅ All data is preserved
 - ✅ Only code changes applied
@@ -180,7 +180,7 @@ docker-compose up -d
 
 #### Remove Volumes (⚠️ Data Loss!)
 ```bash
-docker-compose down -v
+docker-compose -f docker/docker-compose.yml down -v
 ```
 - ❌ Data is permanently deleted
 - ⚠️ Cannot be recovered without backup

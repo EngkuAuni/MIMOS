@@ -25,7 +25,17 @@ Mi‑MUALLIM is the fine‑tuned QariOCR used by this engine for Arabic OCR and 
 3. Add sample PDF to `QariOCR_Finetuning/FT{N}/FT{N}_sample_report.pdf`
 4. Update the registry: `QariOCR_Finetuning/Creating_MI-MUALLIM.md`
 
-## Notes
+## Fine-Tuning
 
-- See `Docs/FINE_TUNING_ANALYSIS.md` for FT1 analysis and improvement path.
-- See `QariOCR_Finetuning/FT2/FT2_IMPLEMENTATION_GUIDE.md` for FT2 plan.
+**Complete guide**: `QariOCR_Finetuning/FINE_TUNING_GUIDE.md`
+
+Covers:
+- Data preparation (synthetic errors, augmentation, rebalancing)
+- Training setup (Kaggle recommended)
+- Integration into app
+- Testing & validation
+
+**Additional resources:**
+- FT1 analysis: `Docs/FINE_TUNING_ANALYSIS.md`
+- FT2 plan: `QariOCR_Finetuning/FT2/FT2_IMPLEMENTATION_GUIDE.md`
+- Version registry: `QariOCR_Finetuning/Creating_MI-MUALLIM.md`
